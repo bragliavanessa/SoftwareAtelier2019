@@ -1,0 +1,136 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb} %for fancy L
+\usepackage{calrsfs} %for fancy L
+\usepackage{cancel}
+\usepackage{tabularx}
+\usepackage[hyphens]{url}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage[titletoc,title]{appendix}
+\usepackage{subfig}
+\DeclareMathAlphabet{\pazocal}{OMS}{zplm}{m}{n} %for fancy L
+\usepackage{epsfig, float,array,tabu,longtable,}
+\usepackage{hyperref,wrapfig}
+\usepackage{enumerate}
+\usepackage{graphicx,psfrag}
+\usepackage{cite}
+\usepackage{sectsty}
+\usepackage{epstopdf}
+\usepackage{amsmath,esint, setspace, fancyhdr, amsfonts, bookmark, blindtext}
+\usepackage[normalem]{ulem}
+\usepackage{tikz}
+\usepackage{rotating}
+\usepackage[americanvoltages,fulldiodes,siunitx]{circuitikz}
+\usepackage{stackengine}
+\usetikzlibrary{matrix}
+\usepackage{multirow}
+\usepackage{multicol}
+\usetikzlibrary{shapes,backgrounds,patterns}
+\usetikzlibrary{mindmap,trees,decorations.markings}
+\usetikzlibrary{quotes,angles}
+\usepackage{verbatim}
+\renewcommand{\baselinestretch}{1}
+\setlength{\textheight}{8in}
+\setlength{\textwidth}{6.5in}
+\setlength{\headheight}{0in}
+\setlength{\headsep}{0.25in}
+\usepackage{graphicx}
+\setlength{\topmargin}{0in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\parindent}{.3in}
+\usepackage{listings}
+\usepackage{color} %red, green, blue, yellow, cyan, magenta, black, white
+\definecolor{mygreen}{RGB}{28,172,0} % color values Red, Green, Blue
+\definecolor{mylilas}{RGB}{170,55,241}
+\doublespacing
+\begin{document}
+
+
+\begin{titlepage}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
+% Center everything on the page
+ 
+%---------------------------------------------------------
+%	HEADING SECTIONS
+%---------------------------------------------------------
+\center 
+\newcommand*{\plogo}{\includegraphics[width=0.25\textwidth]{./img/logo.png}}
+
+\plogo \\[1.5 cm] % Include a department/university logo - this will require the graphicx package 
+
+\textsc{\Large Software Atelier: Simulation, Data Science \& Supercomputing}\\[0.5cm] % Major heading such as course name
+\textsc{\large Spring 2019 }\\[0.5cm] % Minor heading such as course title
+
+%---------------------------------------------------------
+%	TITLE SECTION
+%---------------------------------------------------------
+
+\HRule \\[1cm]
+{ \huge \bfseries Image Segment Detection}\\[0.4cm] % Title of your document
+\HRule \\[2.0cm]
+ 
+%---------------------------------------------------------
+%	AUTHOR SECTION
+%---------------------------------------------------------
+
+
+
+\begin{table}[h]
+\centering
+\begin{tabular}{l l}
+\textbf{Liudmila Karagyaur} & {\href{mailto:karagl@usi.ch}{karagl@usi.ch}} \\
+\textbf{Lorenzo Ferri} & {\href{mailto:ferril@usi.ch}{ferril@usi.ch}} \\
+\textbf{Vanessa Braglia} & {\href{mailto:braglv@usi.ch}{braglv@usi.ch}} \\
+\end{tabular}
+\end{table}
+
+%{\textsc{\textbf{Lorenzo Ferri}}} 	\quad\quad \quad\quad{\href{mailto:ferril@usi.ch}{ferril@usi.ch}}\\
+%{\textsc{\textbf{Vanessa Braglia}}} 	\quad\quad \quad{\href{mailto:braglv@usi.ch}{braglv@usi.ch}}\\
+
+
+~
+%\begin{minipage}{0.4\textwidth}
+%\begin{flushright} \large
+%\emph{Supervisor:} \\
+%Dr. James \textsc{Smith} % Supervisor's Name
+%\end{flushright}
+%\end{minipage}\\[4cm]
+
+% If you don't want a supervisor, uncomment the two lines below and remove the section above
+%\Large \emph{Author:}\\
+%John \textsc{Smith}\\[3cm] % Your name
+
+%---------------------------------------------------------
+%	DATE SECTION
+%---------------------------------------------------------
+\begin{center}
+{\large \today}
+\end{center}
+ % Date, change the \today to a set date if you want to be precise
+
+%---------------------------------------------------------
+%	LOGO SECTION
+%---------------------------------------------------------
+%\vfill
+%\newcommand*{\plogo}{\includegraphics[width=0.25\textwidth]{./img/logo.png}}
+%
+%\plogo\\[1cm] % Include a department/university logo - this will require the graphicx package
+ 
+%---------------------------------------------------------
+
+\vfill % Fill the rest of the page with whitespace
+\end{titlepage}
+
+\newpage
+\tableofcontents
+\newpage
+
+% EXECUTIVE SUMMARY %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Executive Summary}
+The ultimate goal of this project was to design a Thermal Energy Control System (TECS) that will heat, maintain, and cool the core temperature of a workpiece, specifically an aluminum cylinder, for a user-defined amount of time following a user-defined temperature profile. The final design, detailed in this report, is centered around a Thermoelectric Module (TEM) that is used to both heat and cool the workpiece.  Additional features include a fan, used to bring the workpiece to room temperature, and a housing built to protect the user from high temperature surfaces. The total system cost $\$$565 including all materials for the physical build, as well as materials used to test during the design process. This process was informed by the constraints given by the customer or industry standards. These along with the resulting critical design decisions made to create the TECS are discussed in this report.        
+
+
+\end{document}
