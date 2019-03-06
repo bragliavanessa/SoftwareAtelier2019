@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018) (preloaded format=xelatex 2018.9.20)  6 MAR 2019 11:49
+This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018) (preloaded format=xelatex 2018.9.18)  6 MAR 2019 17:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -8,8 +8,8 @@ LaTeX2e <2018-04-01> patch level 2
 Babel <3.18> and hyphenation patterns for 84 language(s) loaded.
 (/usr/local/texlive/2018/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
-(/usr/local/texlive/2018/texmf-dist/tex/latex/base/size12.clo
-File: size12.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+(/usr/local/texlive/2018/texmf-dist/tex/latex/base/size11.clo
+File: size11.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 )
 \c@part=\count80
 \c@section=\count81
@@ -1511,22 +1511,25 @@ File: se-ascii-print.def 2016/05/16 v1.11 stringenc: Printable ASCII characters
 \tf@toc=\write6
 \openout6 = `projectPlan.toc'.
 
- [1] [2]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 136.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 136.
+ [1] [2] [3]
+File: dbscan.png Graphic file (type bmp)
+<dbscan.png>
+ [4] [5]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 197.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 197.
  (./projectPlan.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 136.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 136.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 136.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 197.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 197.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 197.
  )
 (\end occurred when \ifx on line 161 was incomplete) 
 Here is how much of TeX's memory you used:
- 44417 strings out of 492970
- 949266 string characters out of 6133938
- 1095032 words of memory out of 5000000
- 47833 multiletter control sequences out of 15000+600000
- 537572 words of font info for 64 fonts, out of 8000000 for 9000
+ 44441 strings out of 492970
+ 949645 string characters out of 6133938
+ 1096032 words of memory out of 5000000
+ 47850 multiletter control sequences out of 15000+600000
+ 537588 words of font info for 66 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 55i,8n,67p,10390b,809s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 55i,8n,67p,10390b,849s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on projectPlan.pdf (3 pages).
+Output written on projectPlan.pdf (6 pages).

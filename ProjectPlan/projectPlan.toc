@@ -1,1 +1,7 @@
-\contentsline {section}{\numberline {1}Executive Summary}{2}{section.1}
+\contentsline {section}{Introduction}{2}{section*.2}
+\contentsline {section}{\numberline {1}Project tasks}{3}{section.1}
+\contentsline {subsection}{\numberline {1.1}Image clustering}{3}{subsection.1.1}
+\contentsline {subsubsection}{\numberline {1.1.1}k-means}{3}{subsubsection.1.1.1}
+\contentsline {subsubsection}{\numberline {1.1.2}DBSCAN}{3}{subsubsection.1.1.2}
+\contentsline {subsection}{\numberline {1.2}Image deblurring}{4}{subsection.1.2}
+\contentsline {subsection}{\numberline {1.3}Feature extraction}{4}{subsection.1.3}

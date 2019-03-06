@@ -1,4 +1,4 @@
-\documentclass[12pt]{article}
+\documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage{amssymb} %for fancy L
 \usepackage{calrsfs} %for fancy L
@@ -128,9 +128,71 @@
 \tableofcontents
 \newpage
 
-% EXECUTIVE SUMMARY %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Executive Summary}
-The ultimate goal of this project was to design a Thermal Energy Control System (TECS) that will heat, maintain, and cool the core temperature of a workpiece, specifically an aluminum cylinder, for a user-defined amount of time following a user-defined temperature profile. The final design, detailed in this report, is centered around a Thermoelectric Module (TEM) that is used to both heat and cool the workpiece.  Additional features include a fan, used to bring the workpiece to room temperature, and a housing built to protect the user from high temperature surfaces. The total system cost $\$$565 including all materials for the physical build, as well as materials used to test during the design process. This process was informed by the constraints given by the customer or industry standards. These along with the resulting critical design decisions made to create the TECS are discussed in this report.        
+% EXECUTIVE SUMMARY %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\addcontentsline{toc}{section}{Introduction}
+\section*{Introduction}
+Nowadays edge detection techniques have several applications. For example,  a content based video retrieval is widely required for searching digital information in large databases, in order to improve text based retrieval systems \cite{1}. It also has an important role in the development of self-driving vehicles, that need to perform a real-time feature detection \cite{2}, and in medical field, in the analysis of digital images of pathological conditions, such as tumors \cite{3}.    \\
+The ultimate goal of this project is to find the main features in a video and to be able to follow their trajectories. In particular, we will analyse single video frames using edge detection, which is an image segmentation technique.  \\
+There exists a great variety of clustering algorithms that can perform an efficient image segmentation, which is a fundamental step in feature extraction.  The first step consists in analysing different clustering algorithms and detect the most suitable one to the problem at hand. \\
+Since the frames could be noisy or blurry, the next stage will focus on possible ways to improve the result of the clustering algorithm, by looking for an optimal sharpening operator. In this step some deblurring techniques will be examined. \\
+Finally, the edge detection will be executed in parallel on each frame of the video, in order to improve the performance. 
+
+\newpage
+\section{Project tasks}
+\subsection{Image clustering}
+Clustering ia a technique that allows, given a dataset of points, to classify them into different groups depending on their features. In our case the datapoints that have to be classified are the pixels of the given image. The  algorithms that will be examined are k-means, DBSCAN and spectral clustering. 
+\subsubsection{k-means}
+The k-means algorithm is the simpliest and the most popular clustering algorithm. Its ultimate goal is to partition $n$ initial datapoints into $k$ clusters. It requires that the user provides the number $k$ of clusters that have to be found. The algorithms uses an iterative techniques:,starting from an initial set of random centroids. At each iteration it generates the clusters by minimizing the Euclidean distance $D$ between each point $x_i$  and  the centroids $c_j$:  
+$$\arg \min\limits_{j}D(x_i, c_j)\;\;\;\; j = 1, \dots, k$$
+Then, for each cluster $C_j$ a new centroid $c_j$ is computed as the mean of all $n_j$ points $x_i$ assigned to the cluster in the previous step: 
+$$c_j = \frac{1}{n_j} \sum_{x_i \in C_j} x_i$$
+
+\subsubsection{DBSCAN}
+Density-Based Spatial Clustering of Applications with Noise algorithm needs two parameters in order to perform clustering on data: the maximum radius (\textit{eps}) of the neighbourhood and the minimum number of points (\textit{MinPts}) in the \textit{eps}-neighbourhood of a point. All the points are classified as: 
+\begin{itemize}
+	\item \textbf{core point}: if it has equal or more than \textit{MinPts} points in its  \textit{eps}-neighbourhood 
+	\item \textbf{border point}: if it has less than \textit{MinPts} points in its  \textit{eps}-neighbourhood, but it is in the neighbourhood of a core point
+	\item \textbf{noise point}: any point that is not a core or a border point.
+\end{itemize} 
+Then the datapoints are assigned to clusters in the following way. Any two core points that belong to each other's neighbourhood (located within a distance \textit{eps}) are assigned to the same cluster; any border point that belongs to the \textit{eps}-neighbourhood of a core point is assigned to the same cluster of the core point. Noise points are discarded. 
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.4\linewidth]{dbscan}
+	\caption{An illustration of DBSCAN algorithm}
+	\label{fig:dbscan}
+\end{figure}
+
+\subsubsection{Spectral clustering}
+
+
+\subsection{Image deblurring}
+\subsection{Feature extraction}
+
+
+\begin{thebibliography}{9}
+	
+	\bibitem {1}
+	B.V. Patel and B.B. Meshram,
+	\textit{Content Based Retrieval Systems},
+	International Journal of UbiComp (IJU), Vol.3, No.2, 
+	April 2012
+	
+	\bibitem {2} 
+	H. Cho, Y. Seo, B. V. K. V. Kumar and R. R. Rajkumar, 
+	\textit{A multi-sensor fusion system for moving object detection and tracking in urban driving environments}, 
+	IEEE International Conference on Robotics and Automation (ICRA), 
+	2014
+
+	\bibitem {3} 
+	Ed-Edily Mohd,  Azhari,Muhd. Mudzakkir Mohd. Hatta1, Zaw Zaw Htike1andShoon Lei Win, 
+	\textit{Tumor detection in medical imaging: a survey }, 
+	International Journal of Advanced Information Technology (IJAIT) Vol. 4, No. 1, 
+	February 2014
+	
+	
+	
+\end{thebibliography}
 
 
 \end{document}
