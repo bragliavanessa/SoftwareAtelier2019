@@ -124,9 +124,9 @@
 \vfill % Fill the rest of the page with whitespace
 \end{titlepage}
 
-\newpage
-\tableofcontents
-\newpage
+%\newpage
+%\tableofcontents
+%\newpage
 
 % EXECUTIVE SUMMARY %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \addcontentsline{toc}{section}{Introduction}
@@ -164,11 +164,18 @@ Then the datapoints are assigned to clusters in the following way. Any two core 
 \end{figure}
 
 \subsubsection{Spectral clustering}
-
+The spectral clustering makes use of the spectrum (eigenvalues) of the adjacency matrix $L$ of the data, that specify all the connections between the image pixels.
+The eigenvector corresponding to the first eigenvalue $\lambda_1=0$ is the vector of all ones and it does not provide information about the graph structure. The second lowest eigenvector, instead, called the ``Fiedler eigenvector,'' is used by spectral partitioning to divide into sub graphs. The pixels that correspond to a negative value in the eigenvector will be in one group and the ones corresponding to a positive value in the other. 
+For this clustering algorithm, unlike the others, require the construction of the adjacency matrix of the image.
 
 \subsection{Image deblurring}
-\subsection{Feature extraction}
+After the selection of the clustering technique, the next step will be trying to improve the quality of the video frames to see if the algorithm works better. The video frames will be deblurred with different operators and the most suitable one will be chosen.
 
+\subsection{Feature extraction and machine learning}
+
+
+\subsection{Parallelization}
+The last step consists in the parallelization of the program to improve the performance. 
 
 \begin{thebibliography}{9}
 	
