@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015) (preloaded format=xelatex 2015.9.15)  9 MAR 2019 15:06
+This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015) (preloaded format=xelatex 2015.9.15)  10 MAR 2019 11:37
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1152,68 +1152,41 @@ uage-mappings.tex)))
 \pgf@circ@res@step=\dimen284
 \pgf@circ@res@temp=\dimen285
 \pgfstartlinewidth=\dimen286
-)) (/usr/local/texlive/2015/texmf-dist/tex/latex/stackengine/stackengine.sty
-Package: stackengine 2014/01/06 v3.24\ Stacking text and objects in convenient 
-ways
-
-(/usr/local/texlive/2015/texmf-dist/tex/latex/etoolbox/etoolbox.sty
-Package: etoolbox 2015/05/04 v2.2 e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count230
-)
-(/usr/local/texlive/2015/texmf-dist/tex/latex/tools/calc.sty
-Package: calc 2014/10/28 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count231
-\calc@Bcount=\count232
-\calc@Adimen=\dimen287
-\calc@Bdimen=\dimen288
-\calc@Askip=\skip81
-\calc@Bskip=\skip82
-LaTeX Info: Redefining \setlength on input line 80.
-LaTeX Info: Redefining \addtolength on input line 81.
-\calc@Ccount=\count233
-\calc@Cskip=\skip83
-)
-\c@@stackindex=\count266
-\@boxshift=\skip84
-\stack@tmplength=\skip85
-\temp@stkl=\skip86
-\@stackedboxwidth=\skip87
-\@addedbox=\box78
-\@anchorbox=\box79
-\stackedbox=\box80
-\@centerbox=\box81
-\c@ROWcellindex@=\count267
-)
+))
 (/usr/local/texlive/2015/texmf-dist/tex/generic/pgf/frontendlayer/tikz/librarie
 s/tikzlibrarymatrix.code.tex
 File: tikzlibrarymatrix.code.tex 2013/07/12 v3.0.0 (rcs-revision 1.4)
 )
 (/usr/local/texlive/2015/texmf-dist/tex/latex/multirow/multirow.sty
-\bigstrutjot=\dimen289
+\bigstrutjot=\dimen287
 )
 (/usr/local/texlive/2015/texmf-dist/tex/latex/tools/multicol.sty
 Package: multicol 2015/03/31 v1.8m multicolumn formatting (FMi)
-\c@tracingmulticols=\count268
-\mult@box=\box82
-\multicol@leftmargin=\dimen290
-\c@unbalance=\count269
-\c@collectmore=\count270
-\doublecol@number=\count271
-\multicoltolerance=\count272
-\multicolpretolerance=\count273
-\full@width=\dimen291
-\page@free=\dimen292
-\premulticols=\dimen293
-\postmulticols=\dimen294
-\multicolsep=\skip88
-\multicolbaselineskip=\skip89
-\partial@page=\box83
-\last@line=\box84
-\maxbalancingoverflow=\dimen295
-\mult@rightbox=\box85
-\mult@grightbox=\box86
-\mult@gfirstbox=\box87
-\mult@firstbox=\box88
+\c@tracingmulticols=\count230
+\mult@box=\box78
+\multicol@leftmargin=\dimen288
+\c@unbalance=\count231
+\c@collectmore=\count232
+\doublecol@number=\count233
+\multicoltolerance=\count266
+\multicolpretolerance=\count267
+\full@width=\dimen289
+\page@free=\dimen290
+\premulticols=\dimen291
+\postmulticols=\dimen292
+\multicolsep=\skip81
+\multicolbaselineskip=\skip82
+\partial@page=\box79
+\last@line=\box80
+\maxbalancingoverflow=\dimen293
+\mult@rightbox=\box81
+\mult@grightbox=\box82
+\mult@gfirstbox=\box83
+\mult@firstbox=\box84
+\@tempa=\box85
+\@tempa=\box86
+\@tempa=\box87
+\@tempa=\box88
 \@tempa=\box89
 \@tempa=\box90
 \@tempa=\box91
@@ -1227,18 +1200,14 @@ Package: multicol 2015/03/31 v1.8m multicolumn formatting (FMi)
 \@tempa=\box99
 \@tempa=\box100
 \@tempa=\box101
-\@tempa=\box102
-\@tempa=\box103
-\@tempa=\box104
-\@tempa=\box105
-\c@columnbadness=\count274
-\c@finalcolumnbadness=\count275
-\last@try=\dimen296
-\multicolovershoot=\dimen297
-\multicolundershoot=\dimen298
-\mult@nat@firstbox=\box106
-\colbreak@box=\box107
-\mc@col@check@num=\count276
+\c@columnbadness=\count268
+\c@finalcolumnbadness=\count269
+\last@try=\dimen294
+\multicolovershoot=\dimen295
+\multicolundershoot=\dimen296
+\mult@nat@firstbox=\box102
+\colbreak@box=\box103
+\mc@col@check@num=\count270
 )
 (/usr/local/texlive/2015/texmf-dist/tex/generic/pgf/frontendlayer/tikz/librarie
 s/tikzlibraryshapes.code.tex
@@ -1289,32 +1258,32 @@ File: tikzlibraryshapes.multipart.code.tex 2008/01/09 v3.0.0 (rcs-revision 1.1)
 (/usr/local/texlive/2015/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibrary
 shapes.multipart.code.tex
 File: pgflibraryshapes.multipart.code.tex 2010/01/07 v3.0.0 (rcs-revision 1.2)
-\pgfnodepartlowerbox=\box108
-\pgfnodeparttwobox=\box109
-\pgfnodepartthreebox=\box110
-\pgfnodepartfourbox=\box111
-\pgfnodeparttwentybox=\box112
-\pgfnodepartnineteenbox=\box113
-\pgfnodeparteighteenbox=\box114
-\pgfnodepartseventeenbox=\box115
-\pgfnodepartsixteenbox=\box116
-\pgfnodepartfifteenbox=\box117
-\pgfnodepartfourteenbox=\box118
-\pgfnodepartthirteenbox=\box119
-\pgfnodeparttwelvebox=\box120
-\pgfnodepartelevenbox=\box121
-\pgfnodeparttenbox=\box122
-\pgfnodepartninebox=\box123
-\pgfnodeparteightbox=\box124
-\pgfnodepartsevenbox=\box125
-\pgfnodepartsixbox=\box126
-\pgfnodepartfivebox=\box127
+\pgfnodepartlowerbox=\box104
+\pgfnodeparttwobox=\box105
+\pgfnodepartthreebox=\box106
+\pgfnodepartfourbox=\box107
+\pgfnodeparttwentybox=\box108
+\pgfnodepartnineteenbox=\box109
+\pgfnodeparteighteenbox=\box110
+\pgfnodepartseventeenbox=\box111
+\pgfnodepartsixteenbox=\box112
+\pgfnodepartfifteenbox=\box113
+\pgfnodepartfourteenbox=\box114
+\pgfnodepartthirteenbox=\box115
+\pgfnodeparttwelvebox=\box116
+\pgfnodepartelevenbox=\box117
+\pgfnodeparttenbox=\box118
+\pgfnodepartninebox=\box119
+\pgfnodeparteightbox=\box120
+\pgfnodepartsevenbox=\box121
+\pgfnodepartsixbox=\box122
+\pgfnodepartfivebox=\box123
 )))
 (/usr/local/texlive/2015/texmf-dist/tex/generic/pgf/frontendlayer/tikz/librarie
 s/tikzlibrarybackgrounds.code.tex
 File: tikzlibrarybackgrounds.code.tex 2013/07/18 v3.0.0 (rcs-revision 1.3)
-\pgf@layerbox@background=\box128
-\pgf@layerboxsaved@background=\box129
+\pgf@layerbox@background=\box124
+\pgf@layerboxsaved@background=\box125
 )
 (/usr/local/texlive/2015/texmf-dist/tex/generic/pgf/frontendlayer/tikz/librarie
 s/tikzlibrarypatterns.code.tex
@@ -1336,16 +1305,16 @@ File: tikzlibrarytrees.code.tex 2008/02/24 v3.0.0 (rcs-revision 1.2)
 s/tikzlibrarydecorations.code.tex
 (/usr/local/texlive/2015/texmf-dist/tex/generic/pgf/modules/pgfmoduledecoration
 s.code.tex
-\pgfdecoratedcompleteddistance=\dimen299
-\pgfdecoratedremainingdistance=\dimen300
-\pgfdecoratedinputsegmentcompleteddistance=\dimen301
-\pgfdecoratedinputsegmentremainingdistance=\dimen302
-\pgf@decorate@distancetomove=\dimen303
-\pgf@decorate@repeatstate=\count277
-\pgfdecorationsegmentamplitude=\dimen304
-\pgfdecorationsegmentlength=\dimen305
+\pgfdecoratedcompleteddistance=\dimen297
+\pgfdecoratedremainingdistance=\dimen298
+\pgfdecoratedinputsegmentcompleteddistance=\dimen299
+\pgfdecoratedinputsegmentremainingdistance=\dimen300
+\pgf@decorate@distancetomove=\dimen301
+\pgf@decorate@repeatstate=\count271
+\pgfdecorationsegmentamplitude=\dimen302
+\pgfdecorationsegmentlength=\dimen303
 )
-\tikz@lib@dec@box=\box130
+\tikz@lib@dec@box=\box126
 ))
 (/usr/local/texlive/2015/texmf-dist/tex/generic/pgf/frontendlayer/tikz/librarie
 s/tikzlibrarydecorations.markings.code.tex
@@ -1366,24 +1335,24 @@ Package: verbatim 2014/10/28 v1.5q LaTeX2e package for verbatim enhancements
 \verbatim@in@stream=\read3
 )
 (/usr/local/texlive/2015/texmf-dist/tex/latex/listings/listings.sty
-\lst@mode=\count278
-\lst@gtempboxa=\box131
+\lst@mode=\count272
+\lst@gtempboxa=\box127
 \lst@token=\toks48
-\lst@length=\count279
-\lst@currlwidth=\dimen306
-\lst@column=\count280
-\lst@pos=\count281
-\lst@lostspace=\dimen307
-\lst@width=\dimen308
-\lst@newlines=\count282
-\lst@lineno=\count283
-\lst@maxwidth=\dimen309
+\lst@length=\count273
+\lst@currlwidth=\dimen304
+\lst@column=\count274
+\lst@pos=\count275
+\lst@lostspace=\dimen305
+\lst@width=\dimen306
+\lst@newlines=\count276
+\lst@lineno=\count277
+\lst@maxwidth=\dimen307
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2014/09/06 1.5e (Carsten Heinz)
-\c@lstnumber=\count284
-\lst@skipnumbers=\count285
-\lst@framebox=\box132
+\c@lstnumber=\count278
+\lst@skipnumbers=\count279
+\lst@framebox=\box128
 )
 (/usr/local/texlive/2015/texmf-dist/tex/latex/listings/listings.cfg
 File: listings.cfg 2014/09/06 1.5e listings configuration
@@ -1393,22 +1362,22 @@ Package: listings 2014/09/06 1.5e (Carsten Heinz)
 (./projectPlan.aux)
 \openout1 = `projectPlan.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 48.
-LaTeX Font Info:    ... okay on input line 48.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 48.
-LaTeX Font Info:    ... okay on input line 48.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 48.
-LaTeX Font Info:    ... okay on input line 48.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 48.
-LaTeX Font Info:    ... okay on input line 48.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 48.
-LaTeX Font Info:    ... okay on input line 48.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 48.
-LaTeX Font Info:    ... okay on input line 48.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 48.
-LaTeX Font Info:    ... okay on input line 48.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 48.
-LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: subfig package v1.3 is loaded.
 Package caption Info: float package is loaded.
@@ -1422,8 +1391,8 @@ Package: ltcaption 2013/02/03 v1.3-62 longtable captions (AR)
 Package caption Info: rotating package is loaded.
 Package caption Info: wrapfig package is loaded.
 Package caption Info: End \AtBeginDocument code.
-\AtBeginShipoutBox=\box133
-Package hyperref Info: Link coloring OFF on input line 48.
+\AtBeginShipoutBox=\box129
+Package hyperref Info: Link coloring OFF on input line 47.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
@@ -1431,11 +1400,11 @@ Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 (/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
-\c@section@level=\count286
+\c@section@level=\count280
 )
-LaTeX Info: Redefining \ref on input line 48.
-LaTeX Info: Redefining \pageref on input line 48.
-LaTeX Info: Redefining \nameref on input line 48.
+LaTeX Info: Redefining \ref on input line 47.
+LaTeX Info: Redefining \pageref on input line 47.
+LaTeX Info: Redefining \nameref on input line 47.
 
 ABD: EveryShipout initializing macros
 (/usr/local/texlive/2015/texmf-dist/tex/latex/beamer/translator/dicts/translato
@@ -1445,27 +1414,27 @@ Dictionary: translator-basic-dictionary, Language: English
 (/usr/local/texlive/2015/texmf-dist/tex/latex/siunitx/siunitx-abbreviations.cfg
 File: siunitx-abbreviations.cfg 2015/01/21 v2.6e siunitx: Abbreviated units
 )
-\c@lstlisting=\count287
-\c__siunitx_mathsf_int=\count288
-LaTeX Font Info:    Try loading font information for U+msa on input line 48.
+\c@lstlisting=\count281
+\c__siunitx_mathsf_int=\count282
+LaTeX Font Info:    Try loading font information for U+msa on input line 47.
  (/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 48.
+LaTeX Font Info:    Try loading font information for U+msb on input line 47.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for OMS+rsfs on input line 48.
+LaTeX Font Info:    Try loading font information for OMS+rsfs on input line 47.
 
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/calrsfs/OMSrsfs.fd)
-LaTeX Font Info:    Try loading font information for U+esint on input line 48.
+LaTeX Font Info:    Try loading font information for U+esint on input line 47.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/esint/uesint.fd
 File: uesint.fd 
 )
-\c__siunitx_mathtt_int=\count289
+\c__siunitx_mathtt_int=\count283
 File: ./img/logo.png Graphic file (type QTm)
 
 <use  "./img/logo.png" >
@@ -1476,35 +1445,31 @@ File: se-ascii-print.def 2011/12/02 v1.10 stringenc: Printable ASCII characters
 [1
 
 ] [1]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 153.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 152.
 
  (/usr/local/texlive/2015/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 153.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 152.
  [2]
-File: dbscan.png Graphic file (type QTm)
+File: ./img/dbscan.png Graphic file (type QTm)
 
-<use  "dbscan.png" > [3] [4]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 205.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 205.
+<use  "./img/dbscan.png" > [3] [4]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 204.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 204.
  (./projectPlan.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 205.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 205.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 205.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 204.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 204.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 204.
  ) 
 Here is how much of TeX's memory you used:
- 40910 strings out of 493706
- 869293 string characters out of 6145769
- 997048 words of memory out of 5000000
- 43660 multiletter control sequences out of 15000+600000
+ 40420 strings out of 493706
+ 863119 string characters out of 6145769
+ 987102 words of memory out of 5000000
+ 43180 multiletter control sequences out of 15000+600000
  14233 words of font info for 57 fonts, out of 8000000 for 9000
  1328 hyphenation exceptions out of 8191
- 55i,8n,67p,10406b,808s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 55i,8n,67p,10405b,806s stack positions out of 5000i,500n,10000p,200000b,80000s
 
 Output written on projectPlan.pdf (5 pages).
