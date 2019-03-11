@@ -68,7 +68,7 @@
 %---------------------------------------------------------
 
 \HRule \\[1cm]
-{ \huge \bfseries Image Segment Detection}\\[0.4cm] % Title of your document
+{ \huge \bfseries A High Performance Video Segmentation Framework }\\[0.4cm] % Title of your document
 \HRule \\[2.0cm]
  
 %---------------------------------------------------------
@@ -131,20 +131,22 @@
 \addcontentsline{toc}{section}{Introduction}
 \section*{Introduction}
 Nowadays edge detection techniques have several applications. For example,  a content based video retrieval is widely required for searching digital information in large databases, in order to improve text based retrieval systems \cite{1}. It also has an important role in the development of self-driving vehicles, that need to perform a real-time feature detection \cite{2}, and in medical field, in the analysis of digital images of pathological conditions, such as tumors \cite{3}.    \\
-The ultimate goal of this project is to find the main features in a video and to be able to follow their trajectories. In particular, we will analyse single video frames using edge detection, which is an image segmentation technique.  \\
-There exists a great variety of clustering algorithms that can perform an efficient image segmentation, which is a fundamental step in feature extraction.  The first step consists in analysing different clustering algorithms and detect the most suitable one to the problem at hand. \\
+The goal of this project is to find the main features of a video and to be able to follow their trajectories. In particular, we will analyse single video frames using edge detection, which is an image segmentation technique.  \\
+There exists a great variety of clustering algorithms that perform efficient image segmentation, which is a fundamental step in feature extraction.  The first step consists in analysing different clustering algorithms and detect the most suitable one to the problem at hand. \\
 Since the frames could be noisy or blurry, the next stage will focus on possible ways to improve the result of the clustering algorithm, by looking for an optimal sharpening operator. In this step some deblurring techniques will be examined. \\
-Finally, the edge detection will be executed in parallel on each frame of the video, in order to improve the performance. 
+Finally, the edge detection will be executed in parallel on each frame of the video, in order to improve the performance. The final result will be a video that will only contain its critical features. 
 
 \newpage
 \section{Project tasks}
 \subsection{Image clustering}
-Clustering ia a technique that allows, given a dataset of points, to classify them into different groups depending on their features. In our case the datapoints that have to be classified are the pixels of the given image. The  algorithms that will be examined are k-means, DBSCAN and spectral clustering. 
+Clustering is one of the most widely used techniques for exploratory data analysis, with applications ranging from statistics, computer science, biology to image segmentation. In the latter case, it aims at extracting meaningful objects lying on the image. The cluster analysis is to partition an image data set into a number of disjoint groups or clusters. The  algorithms that will be examined are k-means, DBSCAN and spectral partitioning. 
 \subsubsection{k-means}
-The k-means algorithm is the simpliest and the most popular clustering algorithm. Its ultimate goal is to partition $n$ initial datapoints into $k$ clusters. It requires that the user provides the number $k$ of clusters that have to be found. The algorithms uses an iterative techniques:,starting from an initial set of random centroids. At each iteration it generates the clusters by minimizing the Euclidean distance $D$ between each point $x_i$  and  the centroids $c_j$:  
+The k-means algorithm is the simplest and most popular clustering algorithm. Its ultimate goal is to partition $n$ initial datapoints into $k$ clusters. It requires that the user provides the number $k$ of clusters that have to be found. The algorithms uses an iterative approach: starting from an initial set of random centroids, at each iteration it generates the clusters by minimizing the Euclidean distance $D$ between each point $x_i$  and  the centroids $c_j$:  
 $$\arg \min\limits_{j}D(x_i, c_j)\;\;\;\; j = 1, \dots, k$$
 Then, for each cluster $C_j$ a new centroid $c_j$ is computed as the mean of all $n_j$ points $x_i$ assigned to the cluster in the previous step: 
 $$c_j = \frac{1}{n_j} \sum_{x_i \in C_j} x_i$$
+Convergence is achieved when points are no longer interchanged between the clusters.
+
 
 \subsubsection{DBSCAN}
 Density-Based Spatial Clustering of Applications with Noise algorithm needs two parameters in order to perform clustering on data: the maximum radius (\textit{eps}) of the neighbourhood and the minimum number of points (\textit{MinPts}) in the \textit{eps}-neighbourhood of a point. All the points are classified as: 
@@ -158,25 +160,25 @@ Then the datapoints are assigned to clusters in the following way. Any two core 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.4\linewidth]{./img/dbscan}
-	\caption{An illustration of DBSCAN algorithm}
+	\caption{An illustration of DBSCAN algorithm (\url{www.stats.stackexchange.com})}
 	\label{fig:dbscan}
 \end{figure}
 
 \subsubsection{Spectral clustering}
-The spectral clustering makes use of the spectrum (eigenvalues) of the adjacency matrix $L$ of the data, that specify all the connections between the image pixels.
-The eigenvector corresponding to the first eigenvalue $\lambda_1=0$ is the vector of all ones and it does not provide information about the graph structure. The second lowest eigenvector, instead, called the ``Fiedler eigenvector,'' is used by spectral partitioning to divide into sub graphs. The pixels that correspond to a negative value in the eigenvector will be in one group and the ones corresponding to a positive value in the other. 
-For this clustering algorithm, unlike the others, require the construction of the adjacency matrix of the image.
+The spectral clustering makes use of the spectrum (eigenvalues) of the Laplacian matrix $L$ of the data, that specify all the connections between the image pixels.
+The eigenvector corresponding to the first eigenvalue $\lambda_1=0$ is the vector of all ones and it does not provide information about the graph structure. The second lowest eigenvector, instead, called the ``Fiedler eigenvector,'' is used by spectral partitioning to divide into sub graphs. The pixels that correspond to a negative value in the eigenvector will be in one group and the ones corresponding to a positive value in the other. This clustering algorithm, unlike the ones outlined above, relies on global information of the image, that is encoded in the Laplacian matrix.
 
-\subsection{Image deblurring}
-After the selection of the clustering technique, the next step will be trying to sharpen of the video frames to see if the algorithm works better. The video frames will be deblurred with different operators and the most suitable one will be chosen. This process consists in solving a linear system
+
+\subsection{Image sharpening}
+After the selection of the clustering technique, the video frames will be sharpened with different operators and the most suitable one will be chosen. The sharpening process consists in solving a linear system
 $$Ax=b$$
-where b is the blurred image, x is the clear image that we want to obtain and A represents the deblurring operator we want to apply. For the solution of the linear system different algorithms will be used (e.g. steepest descent, conjugate gradient).
-
+where b is the blurred image, x is the clear image that we want to obtain and A represents the sharpening operator we want to apply. For the solution of the linear system different algorithms will be used (e.g. steepest descent, conjugate gradient).
+The final goal of this step is to obtain a sharpening operator that will allow to increase the quality of the image clusters, leading to a better feature extraction. 
 \subsection{Feature extraction and machine learning}
 
 
 \subsection{Parallelization}
-The last step consists in the parallelization of the program to improve the performance. 
+The last step consists in the parallelization of the program: all frames of the video will be processed simultaneously to improve the performance.
 
 \begin{thebibliography}{9}
 	
