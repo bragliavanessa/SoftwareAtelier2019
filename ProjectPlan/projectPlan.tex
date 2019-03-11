@@ -174,8 +174,15 @@ After the selection of the clustering technique, the video frames will be sharpe
 $$Ax=b$$
 where b is the blurred image, x is the clear image that we want to obtain and A represents the sharpening operator we want to apply. For the solution of the linear system different algorithms will be used (e.g. steepest descent, conjugate gradient).
 The final goal of this step is to obtain a sharpening operator that will allow to increase the quality of the image clusters, leading to a better feature extraction. 
-\subsection{Feature extraction and machine learning}
 
+\subsection{Machine learning}
+Now that we have clear images, we need to extract the feature of the image that we are interested in. In order to do that we are going to use a convolutional neural network that is going to label all of our clusters, so that we know what we need to process next.
+
+A convolutional neural network is a ``deep neural network'', since it's composed by different layers. The key difference of a CNN in respect to a standard neural network, is the presence of a ``convolutional'' layer, that scan over the image using a filter. Analysing the image like this will keep the logical connection between the pixel, since each pixel is scanned multiple times when the filter pass over it.\\
+\begin{figure}[h]
+	\includegraphics[width=\linewidth]{img/cnn}
+	\caption{An example of a CNN structure (\url{https://towardsdatascience.com})}
+\end{figure}
 
 \subsection{Parallelization}
 The last step consists in the parallelization of the program: all frames of the video will be processed simultaneously to improve the performance.
