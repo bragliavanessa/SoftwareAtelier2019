@@ -168,7 +168,9 @@ The eigenvector corresponding to the first eigenvalue $\lambda_1=0$ is the vecto
 For this clustering algorithm, unlike the others, require the construction of the adjacency matrix of the image.
 
 \subsection{Image deblurring}
-After the selection of the clustering technique, the next step will be trying to improve the quality of the video frames to see if the algorithm works better. The video frames will be deblurred with different operators and the most suitable one will be chosen.
+After the selection of the clustering technique, the next step will be trying to sharpen of the video frames to see if the algorithm works better. The video frames will be deblurred with different operators and the most suitable one will be chosen. This process consists in solving a linear system
+$$Ax=b$$
+where b is the blurred image, x is the clear image that we want to obtain and A represents the deblurring operator we want to apply. For the solution of the linear system different algorithms will be used (e.g. steepest descent, conjugate gradient).
 
 \subsection{Feature extraction and machine learning}
 
