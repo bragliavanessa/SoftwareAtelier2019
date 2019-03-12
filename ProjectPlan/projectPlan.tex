@@ -164,7 +164,7 @@ Then the datapoints are assigned to clusters in the following way. Any two core 
 	\label{fig:dbscan}
 \end{figure}
 
-\subsubsection{Spectral clustering}
+\subsubsection{Spectral Partitioning}
 The spectral clustering makes use of the spectrum (eigenvalues) of the Laplacian matrix $L$ of the data, that specify all the connections between the image pixels.
 The eigenvector corresponding to the first eigenvalue $\lambda_1=0$ is the vector of all ones and it does not provide information about the graph structure. The second lowest eigenvector, instead, called the ``Fiedler eigenvector,'' is used by spectral partitioning to divide into sub graphs. The pixels that correspond to a negative value in the eigenvector will be in one group and the ones corresponding to a positive value in the other. This clustering algorithm, unlike the ones outlined above, relies on global information of the image, that is encoded in the Laplacian matrix.
 
@@ -195,6 +195,7 @@ The last step consists in the parallelization of the program: all frames of the 
 	\includegraphics[scale=0.35]{./img/time}
 \end{figure}
 
+\newpage
 \begin{thebibliography}{9}
 	
 	\bibitem {1}
