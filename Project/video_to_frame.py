@@ -4,10 +4,10 @@
 import cv2
 
 vidcap = cv2.VideoCapture('./video/prova.mp4')
-success,image = vidcap.read()
+success, image = vidcap.read()
 count = 0
 while success:
-  cv2.imwrite("./frames/frame%d.png" % count, image)    # Save the frame 
-  success,image = vidcap.read()
-  print('Read a new frame: ', success)
-  count += 1
+    cv2.imwrite("./frames/frame%d.png" % count, image)    # Save the frame
+    success, image = vidcap.read()
+    print('Read a new frame: ', success)
+    count += 1
