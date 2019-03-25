@@ -1,7 +1,7 @@
 import numpy as np
 import cv2
 
-img = cv2.imread('./Frames/frame2.png')
+img = cv2.imread('./frames/frame2.png')
 Z = img.reshape((-1, 3))
 
 # convert to np.float32
@@ -9,7 +9,7 @@ Z = np.float32(Z)
 
 # define criteria, number of clusters(K) and apply kmeans()
 criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 10, 1.0)
-K = 5
+K = 2
 ret, label, center = cv2.kmeans(
     Z, K, None, criteria, 10, cv2.KMEANS_RANDOM_CENTERS)
 
