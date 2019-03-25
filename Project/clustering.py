@@ -1,7 +1,7 @@
 import numpy as np
 import cv2
 
-img = cv2.imread('./frame20.png')
+img = cv2.imread('./Frames/frame2.png')
 Z = img.reshape((-1, 3))
 
 # convert to np.float32
