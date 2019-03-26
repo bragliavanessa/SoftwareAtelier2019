@@ -9,48 +9,46 @@ from sklearn.cluster import spectral_clustering
 from sklearn.metrics import pairwise_distances
 np.set_printoptions(threshold=np.inf)
 
-img = cv2.imread('./frames/frame49.png')
+img = cv2.imread('./frames/frame0.png')
 img = cv2.resize(img, None, fx=0.1, fy=0.1, interpolation=cv2.INTER_CUBIC)
 # img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-print(img.shape[:2])
-graph = []
+graph_xy = []
+graph_rgb = []
 for (x, row) in enumerate(img):
     for (y, col) in enumerate(row):
         [r, g, b] = img[x, y]
-        graph.append([x, y, r, g, b])
-graph = np.array(graph)
-print('ciao')
-n = len(graph)
-sigma = 2*np.log(n)
-# graph = image.img_to_graph(img)
+        graph_xy.append([x, y])
+        graph_rgb.append([r, g, b])
+graph_xy = np.array(graph_xy)
+graph_rgb = np.array(graph_rgb)
 
-# D = pairwise_distances(graph)
-# row = []
-# for x in graph:
-#     row.append(np.linalg.norm(graph[0]-x))
+n = len(graph_xy)
+sigma_xy = 2*np.log(n)
+sigma_rgb = 2*np.log(n)
 
-# row = np.array(row)
+dists_xy = sp.spatial.distance.pdist(graph_xy)
+dists_rgb = sp.spatial.distance.pdist(graph_rgb)
+D_xy = sp.spatial.distance.squareform(dists_xy)
+D_rgb = sp.spatial.distance.squareform(dists_rgb)
 
-# D = np.zeros()
-dists = sp.spatial.distance.pdist(graph)
-D = sp.spatial.distance.squareform(dists)
+D = D_xy+D_rgb
 
 
-S = np.exp(-(D**2) / (2*(sigma**2)))
-print(S.shape)
+S_xy = np.exp(-(D_xy**2) / (2*(sigma_xy**2)))
+S_rgb = np.exp(-(D_rgb**2) / (2*(sigma_rgb**2)))
 
-epsilon = 60
+
+S = S_xy+S_rgb
+
+epsilon = 150
 G = np.array([x < epsilon for x in D])
 G = G.astype(int)
 
 W = G * S
 W = sp.sparse.csr_matrix(W)
-# # beta = 30
-# # eps = 1e-6
-# # graph.data = np.exp(-beta * graph.data / graph.data.std()) + eps
-print('a')
-K = 5
+
+K = 3
 
 
 labels = spectral_clustering(W, n_clusters=K,
@@ -65,6 +63,7 @@ plt.imshow(labels*255/K, alpha=0.8)
 #                    for y in x]for x in labels])
 #     plt.contour(c,
 #                 colors=[plt.cm.nipy_spectral(l / float(K))])
+
 
 
 for l in range(K):
