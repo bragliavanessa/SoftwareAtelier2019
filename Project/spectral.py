@@ -13,16 +13,18 @@ img = cv2.imread('./frames/frame0.png')
 img = cv2.resize(img, None, fx=0.1, fy=0.1, interpolation=cv2.INTER_CUBIC)
 # img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-graph_xy = []
-graph_rgb = []
-for (x, row) in enumerate(img):
-    for (y, col) in enumerate(row):
-        [r, g, b] = img[x, y]
-        graph_xy.append([x, y])
-        graph_rgb.append([r, g, b])
-graph_xy = np.array(graph_xy)
-graph_rgb = np.array(graph_rgb)
+def image_to_graph(img):
+    graph_xy = []
+    graph_rgb = []
+    for (x, row) in enumerate(img):
+        for (y, col) in enumerate(row):
+            [r, g, b] = img[x, y]
+            graph_xy.append([x, y])
+            graph_rgb.append([r, g, b])
+    return [np.array(graph_xy), np.array(graph_rgb)]
 
+
+[graph_xy, graph_rgb] = image_to_graph(img)
 n = len(graph_xy)
 sigma_xy = 2*np.log(n)
 sigma_rgb = 2*np.log(n)
@@ -58,13 +60,6 @@ labels = labels.reshape(img.shape[:2])
 plt.figure(figsize=(5, 5))
 plt.imshow(img)
 plt.imshow(labels*255/K, alpha=0.8)
-# for l in range(K):
-#     c = np.array([[np.array_equal(y, [l, l, l])
-#                    for y in x]for x in labels])
-#     plt.contour(c,
-#                 colors=[plt.cm.nipy_spectral(l / float(K))])
-
-
 
 for l in range(K):
     plt.contour(labels == l,
