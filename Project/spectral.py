@@ -13,6 +13,7 @@ img = cv2.imread('./frames/frame102.png')
 img = cv2.resize(img, None, fx=0.1, fy=0.1, interpolation=cv2.INTER_CUBIC)
 # img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
+
 def image_to_graph(img):
     graph_xy = []
     graph_rgb = []
@@ -23,15 +24,15 @@ def image_to_graph(img):
             graph_rgb.append([r, g, b])
     return [np.array(graph_xy), np.array(graph_rgb)]
 
+
 def kNNSimGraph(D):
-    # k = int(np.ceil(2*np.log(len(D)))); 
-    k=150
+    # k = int(np.ceil(2*np.log(len(D))));
+    k = 150
     M = np.zeros(D.shape)
-    for (index,row) in enumerate(D):
+    for (index, row) in enumerate(D):
         sort_idx = np.argsort(row)[:k]
         M[index][sort_idx] = 1
     return M
-
 
 
 [graph_xy, graph_rgb] = image_to_graph(img)
@@ -57,7 +58,7 @@ S = S_xy + S_rgb
 epsilon = 100
 G = np.array([x < epsilon for x in D])
 G = G.astype(int)
-# G = kNNSimGraph(D) 
+# G = kNNSimGraph(D)
 
 W = G * S
 W = sp.sparse.csr_matrix(W)
@@ -65,7 +66,8 @@ W = sp.sparse.csr_matrix(W)
 K = 3
 
 
-labels = spectral_clustering(W, n_clusters=K, assign_labels='kmeans', random_state=42, eigen_solver='amg')
+labels = spectral_clustering(
+    W, n_clusters=K, assign_labels='kmeans', random_state=42, eigen_solver='amg')
 labels = labels.reshape(img.shape[:2])
 
 plt.figure(figsize=(5, 5))

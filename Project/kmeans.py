@@ -1,23 +1,36 @@
 import numpy as np
 import cv2
+import matplotlib.pyplot as plt
 
 img = cv2.imread('./frames/frame2.png')
-Z = img.reshape((-1, 3))
+img = cv2.resize(img, None, fx=1, fy=1, interpolation=cv2.INTER_CUBIC)
 
-# convert to np.float32
+
+def image_to_graph(img):
+    graph = []
+    for (x, row) in enumerate(img):
+        for (y, col) in enumerate(row):
+            [r, g, b] = img[x, y]
+            graph.append([x/img.shape[1], y/img.shape[0], r/255, g/255, b/255])
+    return np.array(graph)
+
+
+Z = image_to_graph(img)
 Z = np.float32(Z)
 
 # define criteria, number of clusters(K) and apply kmeans()
 criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 10, 1.0)
-K = 2
+K = 5
 ret, label, center = cv2.kmeans(
     Z, K, None, criteria, 10, cv2.KMEANS_RANDOM_CENTERS)
 
 # Now convert back into uint8, and make original image
-center = np.uint8(center)
-res = center[label.flatten()]
-res2 = res.reshape((img.shape))
+labels = label.reshape(img.shape[:2])
+plt.figure(figsize=(5, 5))
+plt.imshow(img)
+plt.imshow(labels*255/K, alpha=0.8)
 
-cv2.imshow('Result', res2)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+for l in range(K):
+    plt.contour(labels == l,
+                colors=[plt.cm.nipy_spectral(l / float(K))])
+plt.show()
