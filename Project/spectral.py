@@ -22,6 +22,7 @@ def image_to_graph(img):
             [r, g, b] = img[x, y]
             graph_xy.append([x, y])
             graph_rgb.append([r, g, b])
+            # graph.append([x/img.shape[1], y/img.shape[0], r/255, g/255, b/255])
     return [np.array(graph_xy), np.array(graph_rgb)]
 
 

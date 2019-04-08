@@ -11,7 +11,7 @@ def image_to_graph(img):
     for (x, row) in enumerate(img):
         for (y, col) in enumerate(row):
             [r, g, b] = img[x, y]
-            graph.append([x/img.shape[1], y/img.shape[0], r/255, g/255, b/255])
+            graph.append([r, g, b])
     return np.array(graph)
 
 
