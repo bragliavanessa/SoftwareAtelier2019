@@ -5,3 +5,4 @@
 *.png
 .vscode
 .mypy_cache
+data
