@@ -9,10 +9,77 @@ from sklearn.cluster import spectral_clustering
 from sklearn.metrics import pairwise_distances
 np.set_printoptions(threshold=np.inf)
 
-img = cv2.imread('./frames/frame516.png')
-img = cv2.resize(img, None, fx=0.15, fy=0.15, interpolation=cv2.INTER_CUBIC)
+img = cv2.imread('./frames/frame00.png')
+img = cv2.resize(img, None, fx=0.1, fy=0.1, interpolation=cv2.INTER_CUBIC)
 # img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
+def remove_background(img):
+    #== Parameters           
+    BLUR = 21
+    CANNY_THRESH_1 = 10
+    CANNY_THRESH_2 = 100
+    MASK_DILATE_ITER = 10
+    MASK_ERODE_ITER = 10
+    MASK_COLOR = (0.0,0.0,0.0) # In BGR format
+
+
+    # Read image
+    # img = cv2.imread('./frames/frame0.png')
+    gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+
+    # Edge detection 
+    edges = cv2.Canny(gray, CANNY_THRESH_1, CANNY_THRESH_2)
+    edges = cv2.dilate(edges, None)
+    edges = cv2.erode(edges, None)
+
+    # Find contours
+    contour_info = []
+    contours,hierachy=cv2.findContours(edges, cv2.RETR_LIST, cv2.CHAIN_APPROX_NONE)
+
+    for c in contours:
+        contour_info.append((
+            c,
+            cv2.isContourConvex(c),
+            cv2.contourArea(c),
+        ))
+    contour_info = sorted(contour_info, key=lambda c: c[2], reverse=True)
+    max_contour = contour_info[0]
+
+
+    # Create empty mask, draw filled polygon on it corresponding to largest contour
+    # Mask is black, polygon is white
+    mask = np.zeros(edges.shape)
+
+    for c in contour_info:
+        cv2.fillConvexPoly(mask, c[0], (255))
+
+    # Smooth mask, then blur it
+    mask = cv2.dilate(mask, None, iterations=MASK_DILATE_ITER)
+    mask = cv2.erode(mask, None, iterations=MASK_ERODE_ITER)
+    mask = cv2.GaussianBlur(mask, (BLUR, BLUR), 0)
+    mask_stack = np.dstack([mask]*3)    # Create 3-channel alpha mask
+
+    # Blend masked img into MASK_COLOR background
+    mask_stack  = mask_stack.astype('float32') / 255.0   
+    # print(mask_stack)
+    # cv2.imshow('img', mask_stack)
+    # cv2.waitKey()      
+    img = img.astype('float32') / 255.0   
+    # print(mask_stack[1])
+    # print(img[1])
+    graph_xy = []
+    # graph_rgb = []
+    for (x, row) in enumerate(img):
+        for (y, col) in enumerate(row):
+            # print(mask_stack[x,y])
+            # print(np.any(mask_stack[x,y]))
+            if np.any(mask_stack[x,y]):
+                [r, g, b] = img[x, y]
+                graph_xy.append([x, y, r, g, b])
+                # graph_rgb.append([r, g, b])
+                # graph.append([x/img.shape[1], y/img.shape[0], r/255, g/255, b/255])
+
+    return np.array(graph_xy)
 
 def image_to_graph(img):
     graph_xy = []
@@ -37,6 +104,7 @@ def kNNSimGraph(D):
 
 
 graph_xy = image_to_graph(img)
+# graph_xy = remove_background(img)
 w = np.diag([0.1,0.1,0.3,0.3,0.3])
 graph_xy = np.matmul(graph_xy,w)
 
@@ -67,7 +135,7 @@ S = S_xy #+ S_rgb
 
 # epsilon = np.max(sp.sparse.csgraph.minimum_spanning_tree(S).toarray())
 # print(epsilon)
-epsilon = 20
+epsilon = 30
 G = np.array([x < epsilon for x in D])
 # print(G[0])
 G = G.astype(int)
@@ -76,7 +144,7 @@ G = G.astype(int)
 W = G * S
 W = sp.sparse.csr_matrix(W)
 
-K = 10
+K = 3
 
 
 labels = spectral_clustering(
