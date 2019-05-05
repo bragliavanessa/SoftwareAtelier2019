@@ -9,7 +9,7 @@ from sklearn.cluster import spectral_clustering
 from sklearn.metrics import pairwise_distances
 np.set_printoptions(threshold=np.inf)
 
-img = cv2.imread('./frames/frame00.png')
+img = cv2.imread('./frames/a_masked.png')
 img = cv2.resize(img, None, fx=0.1, fy=0.1, interpolation=cv2.INTER_CUBIC)
 # img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
@@ -82,7 +82,7 @@ K = 3
 
 
 labels = spectral_clustering(
-    W, n_clusters=K, assign_labels='kmeans', random_state=42, eigen_solver='amg')
+    W, n_clusters=K, assign_labels='kmeans', random_state=42, eigen_solver='arpack')
 labels = labels.reshape(img.shape[:2])
 
 plt.figure(figsize=(5, 5))
