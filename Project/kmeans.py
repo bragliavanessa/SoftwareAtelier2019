@@ -25,5 +25,5 @@ def kmeans(img,K):
         Z, K, None, criteria, 10, cv2.KMEANS_RANDOM_CENTERS)
 
     labels = label.reshape(img.shape[:2])
-    return label
+    return labels
 
