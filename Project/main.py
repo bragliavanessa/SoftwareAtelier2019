@@ -11,7 +11,7 @@ from skimage import measure
 # -1 loads as-is so if it will be 3 or 4 channel as the original
 # for i in range(100):
 vidcap = cv2.VideoCapture('./video/ball.mp4')
-success, image = vidcap.read()
+success, image = vidcap.read(-1)
 i=0
 while success:
     # name = './frames/frame'+str(i)+'.png'

@@ -22,7 +22,7 @@ def kmeans(img, K):
     # define criteria, number of clusters(K) and apply kmeans()
     criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 10, 1.0)
     ret, label, center = cv2.kmeans(
-        Z, K, None, criteria, 10, cv2.KMEANS_RANDOM_CENTERS)
+        Z, K, None, criteria, 10, cv2.KMEANS_PP_CENTERS)
 
     labels = label.reshape(img.shape[:2])
     return labels
