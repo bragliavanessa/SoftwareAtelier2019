@@ -3,7 +3,7 @@
 
 import cv2
 
-vidcap = cv2.VideoCapture('./video/15_ball.mp4')
+vidcap = cv2.VideoCapture('./video/ball.mp4')
 success, image = vidcap.read()
 count = 0
 while success:

@@ -2,8 +2,8 @@ import numpy as np
 import cv2
 import matplotlib.pyplot as plt
 
-img = cv2.imread('./frames/a_masked.png')
-img = cv2.resize(img, None, fx=1, fy=1, interpolation=cv2.INTER_CUBIC)
+# img = cv2.imread('./frames/a_masked.png')
+# img = cv2.resize(img, None, fx=1, fy=1, interpolation=cv2.INTER_CUBIC)
 
 
 def image_to_graph(img):
@@ -15,7 +15,7 @@ def image_to_graph(img):
     return np.array(graph)
 
 
-def kmeans(img,K):
+def kmeans(img, K):
     Z = image_to_graph(img)
     Z = np.float32(Z)
 
@@ -26,4 +26,3 @@ def kmeans(img,K):
 
     labels = label.reshape(img.shape[:2])
     return labels
-
