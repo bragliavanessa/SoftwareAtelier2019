@@ -1,0 +1,224 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb} %for fancy L
+\usepackage{calrsfs} %for fancy L
+\usepackage{cancel}
+\usepackage{tabularx}
+\usepackage[hyphens]{url}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage[titletoc,title]{appendix}
+\usepackage{subfig}
+\DeclareMathAlphabet{\pazocal}{OMS}{zplm}{m}{n} %for fancy L
+\usepackage{epsfig, float,array,tabu,longtable,}
+\usepackage{hyperref,wrapfig}
+\usepackage{enumerate}
+\usepackage{graphicx,psfrag}
+\usepackage{cite}
+\usepackage{sectsty}
+\usepackage{epstopdf}
+\usepackage{amsmath,esint, setspace, fancyhdr, amsfonts, bookmark, blindtext}
+\usepackage[normalem]{ulem}
+\usepackage{tikz}
+\usepackage{rotating}
+\usepackage[americanvoltages,fulldiodes,siunitx]{circuitikz}
+\usetikzlibrary{matrix}
+\usepackage{multirow}
+\usepackage{multicol}
+\usetikzlibrary{shapes,backgrounds,patterns}
+\usetikzlibrary{mindmap,trees,decorations.markings}
+\usetikzlibrary{quotes,angles}
+\usepackage{verbatim}
+\renewcommand{\baselinestretch}{1}
+\setlength{\textheight}{8in}
+\setlength{\textwidth}{6.5in}
+\setlength{\headheight}{0in}
+\setlength{\headsep}{0.25in}
+\usepackage{graphicx}
+\setlength{\topmargin}{0in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\parindent}{.3in}
+\usepackage{listings}
+\usepackage{color} %red, green, blue, yellow, cyan, magenta, black, white
+\definecolor{mygreen}{RGB}{28,172,0} % color values Red, Green, Blue
+\definecolor{mylilas}{RGB}{170,55,241}
+\doublespacing
+\begin{document}
+
+
+\begin{titlepage}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
+% Center everything on the page
+ 
+%---------------------------------------------------------
+%	HEADING SECTIONS
+%---------------------------------------------------------
+\center 
+\newcommand*{\plogo}{\includegraphics[width=0.25\textwidth]{./img/logo.png}}
+
+\plogo \\[1.5 cm] % Include a department/university logo - this will require the graphicx package 
+
+\textsc{\Large Software Atelier: Simulation, Data Science \& Supercomputing}\\[0.5cm] % Major heading such as course name
+\textsc{\large Spring 2019 }\\[0.5cm] % Minor heading such as course title
+
+%---------------------------------------------------------
+%	TITLE SECTION
+%---------------------------------------------------------
+
+\HRule \\[1cm]
+{ \huge \bfseries A High Performance Video Segmentation Framework }\\[0.4cm] % Title of your document
+\HRule \\[2.0cm]
+ 
+%---------------------------------------------------------
+%	AUTHOR SECTION
+%---------------------------------------------------------
+
+
+
+\begin{table}[h]
+\centering
+\begin{tabular}{l l}
+\textbf{Liudmila Karagyaur} & {\href{mailto:karagl@usi.ch}{karagl@usi.ch}} \\
+\textbf{Lorenzo Ferri} & {\href{mailto:ferril@usi.ch}{ferril@usi.ch}} \\
+\textbf{Vanessa Braglia} & {\href{mailto:braglv@usi.ch}{braglv@usi.ch}} \\
+\end{tabular}
+\end{table}
+
+%{\textsc{\textbf{Lorenzo Ferri}}} 	\quad\quad \quad\quad{\href{mailto:ferril@usi.ch}{ferril@usi.ch}}\\
+%{\textsc{\textbf{Vanessa Braglia}}} 	\quad\quad \quad{\href{mailto:braglv@usi.ch}{braglv@usi.ch}}\\
+
+
+~
+%\begin{minipage}{0.4\textwidth}
+%\begin{flushright} \large
+%\emph{Supervisor:} \\
+%Dr. James \textsc{Smith} % Supervisor's Name
+%\end{flushright}
+%\end{minipage}\\[4cm]
+
+% If you don't want a supervisor, uncomment the two lines below and remove the section above
+%\Large \emph{Author:}\\
+%John \textsc{Smith}\\[3cm] % Your name
+
+%---------------------------------------------------------
+%	DATE SECTION
+%---------------------------------------------------------
+\begin{center}
+{\large \today}
+\end{center}
+ % Date, change the \today to a set date if you want to be precise
+
+%---------------------------------------------------------
+%	LOGO SECTION
+%---------------------------------------------------------
+%\vfill
+%\newcommand*{\plogo}{\includegraphics[width=0.25\textwidth]{./img/logo.png}}
+%
+%\plogo\\[1cm] % Include a department/university logo - this will require the graphicx package
+ 
+%---------------------------------------------------------
+
+\vfill % Fill the rest of the page with whitespace
+\end{titlepage}
+
+%\newpage
+%\tableofcontents
+%\newpage
+
+% EXECUTIVE SUMMARY %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\addcontentsline{toc}{section}{Introduction}
+\section*{Introduction}
+Nowadays edge detection techniques have several applications. For example,  a content based video retrieval is widely required for searching digital information in large databases, in order to improve text based retrieval systems \cite{1}. It also has an important role in the development of self-driving vehicles, that need to perform a real-time feature detection \cite{2}, and in medical field, in the analysis of digital images of pathological conditions, such as tumors \cite{3}.    \\
+The goal of this project is to find the main features of a video and to be able to follow their trajectories. In particular, we will analyse single video frames using edge detection, which is an image segmentation technique.  \\
+There exists a great variety of clustering algorithms that perform efficient image segmentation, which is a fundamental step in feature extraction.  The first step consists in analysing different clustering algorithms and detect the most suitable one to the problem at hand. \\
+%Since the frames could be noisy or blurry, the next stage will focus on possible ways to improve the result of the clustering algorithm, by looking for an optimal sharpening operator. In this step some deblurring techniques will be examined. \\
+Finally, the edge detection will be executed in parallel on each frame of the video, in order to improve the performance. The final result will be a video that will only contain its critical features. 
+
+\newpage
+\section{Project tasks}
+\subsection{Image clustering}
+Clustering is one of the most widely used techniques for exploratory data analysis, with applications ranging from statistics, computer science, biology to image segmentation. In the latter case, it aims at extracting meaningful objects lying on the image. The cluster analysis is to partition an image data set into a number of disjoint groups or clusters. The  algorithms that will be examined are k-means, DBSCAN and spectral partitioning. 
+\subsubsection{k-means}
+The k-means algorithm is the simplest and most popular clustering algorithm. Its ultimate goal is to partition $n$ initial datapoints into $k$ clusters. It requires that the user provides the number $k$ of clusters that have to be found. The algorithms uses an iterative approach: starting from an initial set of random centroids, at each iteration it generates the clusters by minimizing the Euclidean distance $D$ between each point $x_i$  and  the centroids $c_j$:  
+$$\arg \min\limits_{j}D(x_i, c_j)\;\;\;\; j = 1, \dots, k$$
+Then, for each cluster $C_j$ a new centroid $c_j$ is computed as the mean of all $n_j$ points $x_i$ assigned to the cluster in the previous step: 
+$$c_j = \frac{1}{n_j} \sum_{x_i \in C_j} x_i$$
+Convergence is achieved when points are no longer interchanged between the clusters.
+
+
+\subsubsection{DBSCAN}
+Density-Based Spatial Clustering of Applications with Noise algorithm needs two parameters in order to perform clustering on data: the maximum radius (\textit{eps}) of the neighbourhood and the minimum number of points (\textit{MinPts}) in the \textit{eps}-neighbourhood of a point. All the points are classified as: 
+\begin{itemize}
+	\item \textbf{core point}: if it has equal or more than \textit{MinPts} points in its  \textit{eps}-neighbourhood 
+	\item \textbf{border point}: if it has less than \textit{MinPts} points in its  \textit{eps}-neighbourhood, but it is in the neighbourhood of a core point
+	\item \textbf{noise point}: any point that is not a core or a border point.
+\end{itemize} 
+Then the datapoints are assigned to clusters in the following way. Any two core points that belong to each other's neighbourhood (located within a distance \textit{eps}) are assigned to the same cluster; any border point that belongs to the \textit{eps}-neighbourhood of a core point is assigned to the same cluster of the core point. Noise points are discarded. 
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.4\linewidth]{./img/dbscan}
+	\caption{An illustration of DBSCAN algorithm (\url{www.stats.stackexchange.com})}
+	\label{fig:dbscan}
+\end{figure}
+
+\subsubsection{Spectral Partitioning}
+The spectral clustering makes use of the spectrum (eigenvalues) of the Laplacian matrix $L$ of the data, that specify all the connections between the image pixels.
+The eigenvector corresponding to the first eigenvalue $\lambda_1=0$ is the vector of all ones and it does not provide information about the graph structure. The second lowest eigenvector, instead, called the ``Fiedler eigenvector,'' is used by spectral partitioning to divide into sub graphs. The pixels that correspond to a negative value in the eigenvector will be in one group and the ones corresponding to a positive value in the other. This clustering algorithm, unlike the ones outlined above, relies on global information of the image, that is encoded in the Laplacian matrix.
+
+
+\subsection{Image sharpening}
+After the selection of the clustering technique, the video frames will be sharpened with different operators and the most suitable one will be chosen. The sharpening process consists in solving a linear system
+$$Ax=b$$
+where b is the blurred image, x is the clear image that we want to obtain and A represents the sharpening operator we want to apply. For the solution of the linear system different algorithms will be used (e.g. steepest descent, conjugate gradient).
+The final goal of this step is to obtain a sharpening operator that will allow to increase the quality of the image clusters, leading to a better feature extraction. 
+
+\subsection{Machine learning}
+Now that we have clear images, we need to extract the feature of the image that we are interested in. In order to do that we are going to use a convolutional neural network that is going to label all of our clusters, so that we know what we need to process next.
+
+A convolutional neural network is a ``deep neural network'', since it's composed by different layers. The key difference of a CNN in respect to a standard neural network, is the presence of a ``convolutional'' layer, that scan over the image using a filter. Analysing the image like this will keep the logical connection between the pixel, since each pixel is scanned multiple times when the filter pass over it.\\
+\begin{figure}[h]
+	\includegraphics[width=\linewidth]{img/cnn}
+	\caption{An example of a CNN structure (\url{https://towardsdatascience.com})}
+\end{figure}
+
+\subsection{Parallelization}
+The last step consists in the parallelization of the program: all frames of the video will be processed simultaneously to improve the performance.
+
+
+\section{Project Time Line}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.35]{./img/time}
+\end{figure}
+
+\newpage
+\begin{thebibliography}{9}
+	
+	\bibitem {1}
+	B.V. Patel and B.B. Meshram,
+	\textit{Content Based Retrieval Systems},
+	International Journal of UbiComp (IJU), Vol.3, No.2, 
+	April 2012
+	
+	\bibitem {2} 
+	H. Cho, Y. Seo, B. V. K. V. Kumar and R. R. Rajkumar, 
+	\textit{A multi-sensor fusion system for moving object detection and tracking in urban driving environments}, 
+	IEEE International Conference on Robotics and Automation (ICRA), 
+	2014
+
+	\bibitem {3} 
+	Ed-Edily Mohd,  Azhari,Muhd. Mudzakkir Mohd. Hatta1, Zaw Zaw Htike1andShoon Lei Win, 
+	\textit{Tumor detection in medical imaging: a survey }, 
+	International Journal of Advanced Information Technology (IJAIT) Vol. 4, No. 1, 
+	February 2014
+	
+	
+	
+\end{thebibliography}
+
+
+\end{document}
