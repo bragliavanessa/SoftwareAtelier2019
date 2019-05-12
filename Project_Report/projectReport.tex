@@ -132,9 +132,11 @@
 \section*{Introduction}
 Nowadays edge detection techniques have several applications. For example,  a content based video retrieval is widely required for searching digital information in large databases, in order to improve text based retrieval systems \cite{1}. It also has an important role in the development of self-driving vehicles, that need to perform a real-time feature detection \cite{2}, and in medical field, in the analysis of digital images of pathological conditions, such as tumors \cite{3}.    \\
 The goal of this project is to find the main features of a video and to be able to follow their trajectories. In particular, we will analyse single video frames using edge detection, which is an image segmentation technique.  \\
-There exists a great variety of clustering algorithms that perform efficient image segmentation, which is a fundamental step in feature extraction.  The first step consists in analysing different clustering algorithms and detect the most suitable one to the problem at hand. \\
+There exists a great variety of clustering algorithms that perform efficient image segmentation, which is a fundamental step in feature extraction. 
+The first step consists in analysing different clustering algorithms and detect the most suitable one to the problem at hand. However, before applying clustering algorithms to the frames it is convenient to get rid of the possible influence of the secondary objects. For this purpose the background will be set to black on each frame. \\
 %Since the frames could be noisy or blurry, the next stage will focus on possible ways to improve the result of the clustering algorithm, by looking for an optimal sharpening operator. In this step some deblurring techniques will be examined. \\
-Finally, the edge detection will be executed in parallel on each frame of the video, in order to improve the performance. The final result will be a video that will only contain its critical features. 
+Once the clusters are well defined, a classifier will label the objects of our interest and finally the video will be reconstructed with only its critical features.  
+At the end, the edge detection will be executed in parallel on each frame of the video, in order to improve the performance. 
 
 \newpage
 \section{Project tasks}
