@@ -13,6 +13,9 @@ from skimage import measure
 vidcap = cv2.VideoCapture('./video/ball.mp4')
 success, image = vidcap.read(-1)
 i = 0
+# while i<1000:
+#     success, image = vidcap.read(-1)
+#     i+=1
 while success:
     # name = './frames/frame'+str(i)+'.png'
     # image = cv2.imread(name, -1)
@@ -38,6 +41,9 @@ while success:
             if [r, g, b] == [0, 0, 0]:
                 labels[x, y] = -1
 
+    if not os.path.exists('./clusters/'):
+        os.mkdir('./clusters/')
+    j=0
     for k in range(K):
         idx = []
         for (x, row) in enumerate(masked_image):
@@ -47,15 +53,27 @@ while success:
         idx = np.array(idx)
         new_img = np.copy(masked_image)
         new_img[idx[:, 0], idx[:, 1]] = [0, 0, 0]
+
+        labels2 = km.kmeans(new_img, K)
+
         folder_name = './clusters/frame'+str(i)
-        if not os.path.exists('./clusters/'):
-            os.mkdir('./clusters/')
         if not os.path.exists(folder_name):
             os.mkdir(folder_name)
-        file_name = './clusters/frame'+str(i)+'/cluster'+str(k)+'.png'
-        if os.path.exists(file_name):
-            os.remove(file_name)
-        cv2.imwrite(file_name, new_img)
+                
+        for kk in range(K):
+            file_name = './clusters/frame'+str(i)+'/cluster'+str(j)+'.png'
+            idx2 = []
+            for (x, row) in enumerate(new_img):
+                for (y, col) in enumerate(row):
+                    if labels2[x, y] != kk:
+                        idx2.append([x, y])
+            idx2 = np.array(idx2)
+            new_img2 = np.copy(new_img)
+            new_img2[idx2[:, 0], idx2[:, 1]] = [0, 0, 0]
+            if os.path.exists(file_name):
+                os.remove(file_name)
+            cv2.imwrite(file_name, new_img2)
+            j+=1
     success, image = vidcap.read()
     i += 1
     print(i)
