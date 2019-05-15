@@ -10,9 +10,7 @@ import matplotlib
 labels = {
     "left": "Yellow",
     "right": "Red",
-    "up": "White",
-    " ": "Table",
-    "z": "Noise",
+    "up": "Noise",
 }
 
 
