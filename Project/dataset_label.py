@@ -31,10 +31,10 @@ def press(key, frame, cluster):
         print("Not a valid cluster")
 
 
-start = 0
+start = 50
 end = 3656
 for i in range(start, end+1):
-    for j in range(5):
+    for j in range(25):
         img = plt.imread("clusters/frame%d/cluster%d.png" % (i, j))
 
         fig, ax = plt.subplots()
