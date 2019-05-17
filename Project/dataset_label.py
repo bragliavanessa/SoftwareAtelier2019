@@ -31,7 +31,7 @@ def press(key, frame, cluster):
         print("Not a valid cluster")
 
 
-start = 50
+start = 270
 end = 3656
 for i in range(start, end+1):
     for j in range(25):
