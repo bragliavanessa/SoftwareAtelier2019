@@ -25,17 +25,17 @@ def press(key, frame, cluster):
         else:
             append_write = 'w'  # make a new file if not
         with open('dataset.csv', append_write) as fd:
-            fd.write("frame%d/cluster%d\t%s\n" % (i, j, labels[key]))
+            fd.write("frame%d_cluster%d\t%s\n" % (i, j, labels[key]))
             plt.close()
     else:
         print("Not a valid cluster")
 
 
-start = 270
+start = 0
 end = 3656
 for i in range(start, end+1):
     for j in range(25):
-        img = plt.imread("clusters/frame%d/cluster%d.png" % (i, j))
+        img = plt.imread("clusters/frame%d_cluster%d.png" % (i, j))
 
         fig, ax = plt.subplots()
         fig.canvas.mpl_connect(

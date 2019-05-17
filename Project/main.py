@@ -43,7 +43,7 @@ while success:
 
     if not os.path.exists('./clusters/'):
         os.mkdir('./clusters/')
-    j=0
+    j = 0
     for k in range(K):
         idx = []
         for (x, row) in enumerate(masked_image):
@@ -56,12 +56,8 @@ while success:
 
         labels2 = km.kmeans(new_img, K)
 
-        folder_name = './clusters/frame'+str(i)
-        if not os.path.exists(folder_name):
-            os.mkdir(folder_name)
-                
         for kk in range(K):
-            file_name = './clusters/frame'+str(i)+'/cluster'+str(j)+'.png'
+            file_name = './clusters/frame'+str(i)+'_cluster'+str(j)+'.png'
             idx2 = []
             for (x, row) in enumerate(new_img):
                 for (y, col) in enumerate(row):
@@ -73,7 +69,7 @@ while success:
             if os.path.exists(file_name):
                 os.remove(file_name)
             cv2.imwrite(file_name, new_img2)
-            j+=1
+            j += 1
     success, image = vidcap.read()
     i += 1
     print(i)
