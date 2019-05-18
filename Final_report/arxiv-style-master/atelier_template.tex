@@ -1,0 +1,117 @@
+\documentclass{article}
+
+
+\usepackage{arxiv}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{lipsum}		% Can be removed after putting your text content
+
+\title{A High Performance Video Segmentation Framework }
+
+%\date{September 9, 1985}	% Here you can change the date presented in the paper title
+%\date{} 					% Or removing it
+
+\author{
+  Vanessa Braglia \\
+  \texttt{braglv@usi.ch} \\
+  %% examples of more authors
+   \And
+ Liudmila Karagyaur \\
+  \texttt{karagl@usi.ch} \\
+     \And
+  Lorenzo Ferri \\
+  \texttt{ferril@usi.ch} \\
+  %% \AND
+  %% Coauthor \\
+  %% Affiliation \\
+  %% Address \\
+  %% \texttt{email} \\
+  %% \And
+  %% Coauthor \\
+  %% Affiliation \\
+  %% Address \\
+  %% \texttt{email} \\
+  %% \And
+  %% Coauthor \\
+  %% Affiliation \\
+  %% Address \\
+  %% \texttt{email} \\
+}
+
+\begin{document}
+
+
+{\fontfamily{cmr}\selectfont
+\maketitle
+
+\begin{abstract}
+Edge detection is a ubiquitous technique in scientific computing. It is widely utilised in content based video retrieval for the search of digital information in large datasets, and plays also a critical role in the development of self-driving vehicles that need to perform real-time feature detection.
+We present a high performance video segmentation framework that is able to find the main features of a video, and to follow their trajectories. Initially, we evaluate the performance and solution quality of k-means clustering algorithms, in order to ensure that it is a suitable choice for the application at hand. Subsequently, a convolutional neural network is trained to label the obtained clusters, thus enabling the extraction of the main features of the video. The process is executed in parallel for each frame of the video, in order to reduce the overall run time of the routine.
+\end{abstract}
+
+
+% keywords can be removed
+\keywords{Image segmentation \and Clustering \and High performance computing}
+
+\large
+\section{Introduction}
+
+Nowadays edge detection techniques have several applications. For example, a content based video retrieval is widely required for searching digital information in large databases, in order to improve text based retrieval systems \cite{1}. It also has an important role in the development of self-driving vehicles, that need to perform a real-time feature detection \cite{2}, and in medical field, in the analysis of digital images of pathological conditions, such as tumors \cite{3}. \\
+The goal of this project is to find the main features of a video and to be able to follow their trajectories. In particular, we will analyse single video frames using edge detection, which is an image segmentation technique. \\
+There exists a great variety of clustering algorithms that perform efficient image segmentation, which is a fundamental step in feature extraction. The first step consists in detecting a clustering algorithm that suits better the problem at hand. 
+However, before applying clustering algorithm to the frames it is convenient to get rid of the possible influence of the secondary objects. For this purpose the background will be set to black on each frame before proceeding with the analysis. \\
+Once the clusters are well defined, a classifier will label the objects of our interest and finally the video will be reconstructed with only its critical features. At the end, the edge detection will be executed in parallel on each frame of the video, in order to improve the performance. \\
+\textbf{AGGIUNGERE ORGANIZZAZIONE PAPER}
+
+
+\section{Image segmentations and clustering}
+The project is organized in 4 main steps. The first task to be completed is the application of the k-means clustering algorithm to the video, previously subdivided in frames. The goal is to be able to identify the main features among other secondary objects and obtain isolated clusters for each of them. In order to facilitate this task the background of each frame is set to black before applying the clustering algorithm. To obtain the desired result we have applied the k-means clustering two times: the first time it is applied on the frame to detect the main features and the second time on each resulting cluster generated in the previous step. The purpose of this second call is to remove the noise from those clusters that contain the main features of the frame. \\
+Now we have to distinguish between the clusters that contain the main items of the video and those that consist of noisy components. In order to do that we are going to use a convolutional neural network that is going to label all the generated clusters, identifying the ones that will be processed in the later stages. \\
+Each cluster classified as main component of the frame is then exposed to a an algorithm that identifies all the connected components. The goal we want to reach is the partition of the cluster in its individual items.  \\
+The final step consists in reducing the overall run time of the routine and this will be done by executing the whole process in parallel for a suitable number of frames, depending on the number of processors available in the machine.
+\subsection{\textit{k}-means clustering algorithm} 
+
+
+\section{Numerical Results}
+
+\section{Conclusions}
+
+\bibliographystyle{unsrt}  
+%\bibliography{references}  %%% Remove comment to use the external .bib file (using bibtex).
+%%% and comment out the ``thebibliography'' section.
+
+
+%%% Comment out this section when you \bibliography{references} is enabled.
+\begin{thebibliography}{1}
+
+	
+\bibitem {1}
+B.V. Patel and B.B. Meshram,
+\textit{Content Based Retrieval Systems},
+International Journal of UbiComp (IJU), Vol.3, No.2, 
+April 2012
+
+\bibitem {2} 
+H. Cho, Y. Seo, B. V. K. V. Kumar and R. R. Rajkumar, 
+\textit{A multi-sensor fusion system for moving object detection and tracking in urban driving environments}, 
+IEEE International Conference on Robotics and Automation (ICRA), 
+2014
+
+\bibitem {3} 
+Ed-Edily Mohd,  Azhari,Muhd. Mudzakkir Mohd. Hatta, Zaw Zaw Htike,  Shoon Lei Win, 
+\textit{Tumor detection in medical imaging: a survey }, 
+International Journal of Advanced Information Technology (IJAIT) Vol. 4, No. 1, 
+February 2014
+
+
+\end{thebibliography}
+
+}
+\end{document}
