@@ -1,3 +1,4 @@
+import time
 import torch
 import torchvision
 import torchvision.transforms as transforms
@@ -6,40 +7,78 @@ import numpy as np
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
+import os
+import os.path
+import pandas as pd
+from torch.utils.data import Dataset, DataLoader
+from torch.utils.data.sampler import SubsetRandomSampler
+from torch.autograd import Variable
+from skimage import io
+from skimage.transform import resize
+
+
+classes = ("Yellow", "Red", "Noise")
+classes_index = torch.arange(0, 3)
+classes_one_hot = torch.nn.functional.one_hot(classes_index)
+
+
+class ImageDataset(Dataset):
+
+    def __init__(self, csv_file, root_dir, transform=None):
+        """
+        Args:
+            csv_file (string): Path to the csv file with annotations.
+            root_dir (string): Directory with all the images.
+            transform (callable, optional): Optional transform to be applied
+                on a sample.
+        """
+        self.cluster_frame = pd.read_csv(csv_file, header=None, sep="\t")
+        self.root_dir = root_dir
+        self.transform = transform
+
+    def __len__(self):
+        return len(self.cluster_frame)
+
+    def __getitem__(self, idx):
+        img_name = os.path.join(self.root_dir,
+                                self.cluster_frame.iloc[idx, 0]+".png")
+        image = io.imread(img_name)
+        image = resize(image, (32, 32))
+        if self.transform:
+            image = self.transform(image)
+        cluster = self.cluster_frame.iloc[idx, 1:].values[0]
+        index = classes.index(cluster)
+        one_hot = classes_one_hot[index]
+        sample = (image, one_hot)
+
+        return sample
+
 
 transform = transforms.Compose(
     [transforms.ToTensor(),
      transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
 
-trainset = torchvision.datasets.CIFAR10(root='./data', train=True,
-                                        download=True, transform=transform)
-trainloader = torch.utils.data.DataLoader(trainset, batch_size=4,
-                                          shuffle=True, num_workers=2)
+validation_split = .2
+shuffle_dataset = True
+random_seed = 42
+batch_size = 4
+dataset = ImageDataset(csv_file="./dataset.csv",
+                       root_dir="./clusters", transform=transform)
+dataset_size = len(dataset)
+indices = list(range(dataset_size))
+split = int(np.floor(validation_split * dataset_size))
+if shuffle_dataset:
+    np.random.seed(random_seed)
+    np.random.shuffle(indices)
+train_indices, val_indices = indices[split:], indices[:split]
 
-testset = torchvision.datasets.CIFAR10(root='./data', train=False,
-                                       download=True, transform=transform)
-testloader = torch.utils.data.DataLoader(testset, batch_size=4,
-                                         shuffle=False, num_workers=2)
+train_sampler = SubsetRandomSampler(train_indices)
+valid_sampler = SubsetRandomSampler(val_indices)
 
-classes = ('plane', 'car', 'bird', 'cat',
-           'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
-
-
-def imshow(img):
-    img = img / 2 + 0.5     # unnormalize
-    npimg = img.numpy()
-    plt.imshow(np.transpose(npimg, (1, 2, 0)))
-    plt.show()
-
-
-# get some random training images
-dataiter = iter(trainloader)
-images, labels = dataiter.next()
-
-# show images
-imshow(torchvision.utils.make_grid(images))
-# print labels
-print(' '.join('%5s' % classes[labels[j]] for j in range(4)))
+train_load = torch.utils.data.DataLoader(dataset, batch_size=batch_size,
+                                         sampler=train_sampler)
+validation_load = torch.utils.data.DataLoader(dataset, batch_size=batch_size,
+                                              sampler=valid_sampler)
 
 
 class Net(nn.Module):
@@ -62,16 +101,22 @@ class Net(nn.Module):
         return x
 
 
+device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+print(device)
 net = Net()
+net.to(device)
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.9)
 
+# Training
 for epoch in range(2):  # loop over the dataset multiple times
 
     running_loss = 0.0
-    for i, data in enumerate(trainloader, 0):
+    for i, data in enumerate(train_load, 0):
         # get the inputs
         inputs, labels = data
+        print(labels)
+        inputs, labels = inputs.to(device), labels.to(device)
 
         # zero the parameter gradients
         optimizer.zero_grad()
@@ -90,4 +135,5 @@ for epoch in range(2):  # loop over the dataset multiple times
             running_loss = 0.0
 
 print('Finished Training')
+
 torch.save(net.state_dict(), './cnn')
