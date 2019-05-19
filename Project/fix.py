@@ -14,7 +14,7 @@ def find_files(start_dir):
 
 
 def alter_path(path, new_dir):
-    newpath = path.split('\\')[1:]
+    newpath = path.split('/')[1:]
     newpath = '_'.join(newpath)
     print(newpath)
     return os.path.join(new_dir, newpath)

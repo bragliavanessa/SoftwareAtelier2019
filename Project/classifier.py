@@ -41,29 +41,30 @@ class ImageDataset(Dataset):
 
     def __getitem__(self, idx):
         img_name = os.path.join(self.root_dir,
-                                self.cluster_frame.iloc[idx, 0]+".png")
+                                self.cluster_frame.iloc[idx, 0])
         image = io.imread(img_name)
         image = resize(image, (32, 32))
+        image = image.transpose((2, 0, 1))
         if self.transform:
             image = self.transform(image)
         cluster = self.cluster_frame.iloc[idx, 1:].values[0]
         index = classes.index(cluster)
-        one_hot = classes_one_hot[index]
-        sample = (image, one_hot)
+        # one_hot = classes_one_hot[index]
+        sample = (image, index)
 
         return sample
 
 
 transform = transforms.Compose(
     [transforms.ToTensor(),
-     transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
+     transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])])
 
 validation_split = .2
 shuffle_dataset = True
 random_seed = 42
 batch_size = 4
 dataset = ImageDataset(csv_file="./dataset.csv",
-                       root_dir="./clusters", transform=transform)
+                       root_dir="./clusters", transform=None)
 dataset_size = len(dataset)
 indices = list(range(dataset_size))
 split = int(np.floor(validation_split * dataset_size))
@@ -77,8 +78,6 @@ valid_sampler = SubsetRandomSampler(val_indices)
 
 train_load = torch.utils.data.DataLoader(dataset, batch_size=batch_size,
                                          sampler=train_sampler)
-validation_load = torch.utils.data.DataLoader(dataset, batch_size=batch_size,
-                                              sampler=valid_sampler)
 
 
 class Net(nn.Module):
@@ -102,7 +101,6 @@ class Net(nn.Module):
 
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-print(device)
 net = Net()
 net.to(device)
 criterion = nn.CrossEntropyLoss()
@@ -115,8 +113,7 @@ for epoch in range(2):  # loop over the dataset multiple times
     for i, data in enumerate(train_load, 0):
         # get the inputs
         inputs, labels = data
-        print(labels)
-        inputs, labels = inputs.to(device), labels.to(device)
+        inputs = inputs.float()
 
         # zero the parameter gradients
         optimizer.zero_grad()
@@ -129,10 +126,10 @@ for epoch in range(2):  # loop over the dataset multiple times
 
         # print statistics
         running_loss += loss.item()
-        if i % 2000 == 1999:    # print every 2000 mini-batches
-            print('[%d, %5d] loss: %.3f' %
-                  (epoch + 1, i + 1, running_loss / 2000))
-            running_loss = 0.0
+        # if i % 2000 == 1999:    # print every 2000 mini-batches
+        print('[%d, %5d] loss: %.3f' %
+              (epoch + 1, i + 1, running_loss))
+        running_loss = 0.0
 
 print('Finished Training')
 
