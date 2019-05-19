@@ -62,7 +62,7 @@ transform = transforms.Compose(
 validation_split = .2
 shuffle_dataset = True
 random_seed = 42
-batch_size = 4
+batch_size = 32
 dataset = ImageDataset(csv_file="./dataset.csv",
                        root_dir="./clusters", transform=None)
 dataset_size = len(dataset)
@@ -101,6 +101,7 @@ class Net(nn.Module):
 
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+print(device)
 net = Net()
 net.to(device)
 criterion = nn.CrossEntropyLoss()
@@ -114,6 +115,7 @@ for epoch in range(2):  # loop over the dataset multiple times
         # get the inputs
         inputs, labels = data
         inputs = inputs.float()
+        inputs, labels = inputs.to(device), labels.to(device)
 
         # zero the parameter gradients
         optimizer.zero_grad()
@@ -127,8 +129,8 @@ for epoch in range(2):  # loop over the dataset multiple times
         # print statistics
         running_loss += loss.item()
         # if i % 2000 == 1999:    # print every 2000 mini-batches
-        print('[%d, %5d] loss: %.3f' %
-              (epoch + 1, i + 1, running_loss))
+        print('[%d, %5d/%d] loss: %.3f' %
+              (epoch + 1, i + 1, len(train_load), running_loss))
         running_loss = 0.0
 
 print('Finished Training')
