@@ -8,7 +8,8 @@ def find_files(start_dir):
     for root, dirs, files in os.walk(start_dir):
         if root == start_dir:
             continue
-        ext_paths = ext_paths + map(lambda x: os.path.join(root, x), files)
+        ext_paths = ext_paths + \
+            list(map(lambda x: os.path.join(root, x), files))
     return ext_paths
 
 
@@ -21,7 +22,7 @@ def alter_path(path, new_dir):
 
 def main():
     for i in find_files(sys.argv[1]):
-        print(i, alter_path(i, sys.argv[1]))
+        # print(i, alter_path(i, sys.argv[1]))
         shutil.copy(i, alter_path(i, sys.argv[1]))
 
 
