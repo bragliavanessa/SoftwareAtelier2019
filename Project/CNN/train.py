@@ -13,19 +13,13 @@ from Model import Net
 from Dataset import ImageDataset
 
 classes = ("Yellow", "Red", "Noise")
-classes_index = torch.arange(0, 3)
-classes_one_hot = torch.nn.functional.one_hot(classes_index)
-
-transform = transforms.Compose(
-    [transforms.ToTensor(),
-     transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])])
 
 validation_split = .2
 shuffle_dataset = True
 random_seed = 42
-batch_size = 32
+batch_size = 16
 dataset = ImageDataset(csv_file="./dataset.csv",
-                       root_dir="./../clusters", transform=None)
+                       root_dir="./../clusters")
 dataset_size = len(dataset)
 indices = list(range(dataset_size))
 split = int(np.floor(validation_split * dataset_size))
@@ -45,14 +39,11 @@ print(device)
 net = Net()
 net.to(device)
 criterion = nn.CrossEntropyLoss()
-optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.9)
+optimizer = optim.SGD(net.parameters(), lr=0.01, momentum=0.7)
 
 # Training
-for epoch in range(2):  # loop over the dataset multiple times
-
-    running_loss = 0.0
+for epoch in range(5):
     for i, data in enumerate(train_load, 0):
-        # get the inputs
         inputs, labels = data
         inputs = inputs.float()
         inputs, labels = inputs.to(device), labels.to(device)
@@ -67,11 +58,8 @@ for epoch in range(2):  # loop over the dataset multiple times
         optimizer.step()
 
         # print statistics
-        running_loss += loss.item()
-        # if i % 2000 == 1999:    # print every 2000 mini-batches
         print('[%d, %5d/%d] loss: %.3f' %
-              (epoch + 1, i + 1, len(train_load), running_loss))
-        running_loss = 0.0
+              (epoch + 1, i + 1, len(train_load), loss.item()))
 
 print('Finished Training')
 
