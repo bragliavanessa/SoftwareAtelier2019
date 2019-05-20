@@ -5,6 +5,18 @@ import matplotlib.pyplot as plt
 import kmeans as km
 from skimage import filters
 from skimage import measure
+import time
+import torch
+import torchvision
+import torchvision.transforms as transforms
+import torch.optim as optim
+import torch.nn as nn
+from torch.utils.data import DataLoader
+from torch.utils.data.sampler import SubsetRandomSampler
+from torch.autograd import Variable
+from Model import Net
+from Dataset import ImageDataset
+from skimage.transform import resize
 
 
 # original image
@@ -13,6 +25,12 @@ from skimage import measure
 vidcap = cv2.VideoCapture('./video/ball.mp4')
 success, image = vidcap.read(-1)
 i = 0
+
+device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+net = Net()
+net.load_state_dict(torch.load("./cnn",'cpu'))
+net.eval()
+net.to(device)
 # while i<1000:
 #     success, image = vidcap.read(-1)
 #     i+=1
@@ -69,7 +87,13 @@ while success:
             if os.path.exists(file_name):
                 os.remove(file_name)
             cv2.imwrite(file_name, new_img2)
+            image_t = resize(new_img2, (256, 256))
+            image_t = image_t.transpose((2, 0, 1))
+            outputs = net(torch.tensor(image_t))
+            _, predicted = torch.max(outputs, 1)
+            print(predicted)
             j += 1
+        
     success, image = vidcap.read()
     i += 1
     print(i)
