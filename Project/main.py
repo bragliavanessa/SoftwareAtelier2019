@@ -14,8 +14,9 @@ import torch.nn as nn
 from torch.utils.data import DataLoader
 from torch.utils.data.sampler import SubsetRandomSampler
 from torch.autograd import Variable
-from Model import Net
-from Dataset import ImageDataset
+from CNN.Model import Net
+from CNN.Dataset import ImageDataset
+from skimage import io
 from skimage.transform import resize
 
 
@@ -28,7 +29,7 @@ i = 0
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 net = Net()
-net.load_state_dict(torch.load("./cnn",'cpu'))
+net.load_state_dict(torch.load("./CNN/cnn", 'cpu'))
 net.eval()
 net.to(device)
 # while i<1000:
@@ -87,13 +88,17 @@ while success:
             if os.path.exists(file_name):
                 os.remove(file_name)
             cv2.imwrite(file_name, new_img2)
-            image_t = resize(new_img2, (256, 256))
+            image_t = io.imread(file_name)
+            image_t = resize(image_t, (256, 256))
             image_t = image_t.transpose((2, 0, 1))
-            outputs = net(torch.tensor(image_t))
+            image_t = torch.tensor([image_t])
+            image_t = image_t.float()
+            outputs = net(image_t)
             _, predicted = torch.max(outputs, 1)
-            print(predicted)
+            print("%s Prediction: %d" %
+                  (file_name, predicted.item()))
             j += 1
-        
+
     success, image = vidcap.read()
     i += 1
-    print(i)
+    # print(i)
