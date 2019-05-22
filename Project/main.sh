@@ -1,17 +1,22 @@
 #!/bin/bash
 
-#python3 read_video.py
+python3 read_video.py
 i=0
 ii=0
-while [ "$i" -lt 12 ]
+N=15
+while [ "$i" -lt 3582 ]
 do
-    echo "$i"
-    ii=$((i+1));
-	python3 process_frame.py "$i" &
-    python3 process_frame.py "$ii"
-    
+    ii=$((i+N));
+    if [ $ii -gt 3582 ] 
+    then
+        $ii = 3582
+    fi
+    for j in $(seq $i $ii)
+    do
+    python3 process_frame.py "$j" &
+    done
     wait
-    i=$((ii+1));
+    i=$((j+1));
 done
 
 python3 assemble_video.py

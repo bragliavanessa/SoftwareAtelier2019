@@ -53,9 +53,9 @@ masked_image = cv2.bitwise_and(image, mask)
 K = 5
 y=0
 labels = km.kmeans(masked_image, K)
-yellow2=0
-redballs=0
-yellowballs=0
+yellow2=image
+redballs=image
+yellowballs=image
 
 for (x, row) in enumerate(masked_image):
     for (y, col) in enumerate(row):
@@ -99,7 +99,6 @@ for k in range(K):
             [redballs,num_red] = conn_comp(new_img2,i)
         elif pr==0:
             if y==1:
-                print('2')
                 [yellow2,num_yellow2] = conn_comp(new_img2,i)
             else:
                 y = 1
@@ -112,15 +111,19 @@ if int(i)<51:
     num_red=7
     num_yellow=7
 
-totalballs=0
-if yellowballs and redballs:
+totalballs=image
+if (not np.array_equal(yellowballs, image)) and not(np.array_equal(redballs, image)):
     totalballs = np.concatenate((redballs, yellowballs))
-elif yellowballs:
+elif not np.array_equal(yellowballs, image):
     totalballs = yellowballs
 else:
     totalballs = redballs
 
-if yellow2:
+if not np.array_equal(yellow2, image):
     totalballs = np.concatenate((totalballs, yellow2))
 
-balls_to_frames(totalballs, num_red, num_yellow,file_name,image)
+if not np.array_equal(totalballs, image):
+    balls_to_frames(totalballs, num_red, num_yellow,file_name)
+else:
+    os.remove(file_name)
+    cv2.imwrite(file_name, image*0)
