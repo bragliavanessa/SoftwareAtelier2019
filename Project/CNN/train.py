@@ -14,7 +14,7 @@ from Dataset import ImageDataset
 
 classes = ("Yellow", "Red", "Noise")
 
-validation_split = .2
+validation_split = .1
 shuffle_dataset = True
 random_seed = 42
 batch_size = 16
@@ -44,7 +44,7 @@ optimizer = optim.SGD(net.parameters(), lr=0.01, momentum=0.7)
 # Training
 for epoch in range(5):
     for i, data in enumerate(train_load, 0):
-        inputs, labels = data
+        inputs, labels, name = data
         inputs = inputs.float()
         inputs, labels = inputs.to(device), labels.to(device)
 

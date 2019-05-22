@@ -14,7 +14,7 @@ from Dataset import ImageDataset
 
 classes = ("Yellow", "Red", "Noise")
 
-validation_split = .2
+validation_split = .1
 shuffle_dataset = True
 random_seed = 42
 batch_size = 1
