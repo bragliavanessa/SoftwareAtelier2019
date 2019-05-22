@@ -35,6 +35,8 @@ num_files = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join
 
 i=sys.argv[1]
 
+print(i)
+
 file_name = "./frames/frame"+str(i)+".png"
 image = cv2.imread(file_name)
 mask = np.zeros(image.shape, dtype=np.uint8)
@@ -110,6 +112,7 @@ if int(i)<51:
     num_red=7
     num_yellow=7
 
+totalballs=0
 if yellowballs and redballs:
     totalballs = np.concatenate((redballs, yellowballs))
 elif yellowballs:
@@ -120,4 +123,4 @@ else:
 if yellow2:
     totalballs = np.concatenate((totalballs, yellow2))
 
-res = balls_to_frames(totalballs, num_red, num_yellow)
+balls_to_frames(totalballs, num_red, num_yellow,file_name,image)
