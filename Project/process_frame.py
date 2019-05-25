@@ -29,9 +29,6 @@ net.load_state_dict(torch.load("./CNN/cnn", 'cpu'))
 net.eval()
 net.to(device)
 
-DIR = "./frames/"
-num_files = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])
-
 
 i=sys.argv[1]
 
