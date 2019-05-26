@@ -148,6 +148,13 @@ The application of this algorithm on images will consider each pixel as one node
 \subsection{Convolutional Neural Network}
 \textbf{LORE LAVORA}
 
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.98\linewidth]{img/cnn_gen}
+	\caption{}
+	\label{fig:cnngen}
+\end{figure}
+
 
 
 \subsection{Multiprocessor parallelization}
@@ -164,11 +171,11 @@ The usage of multiple processors instead of one presents several advantages. One
 
 
 \section{Results and Discussion}
-This section presents, step by step, the results of the High Performance Video Segmentation Framework, applying the methods previously discussed to a specific case. The way the algorithms are adapted and manipulated in order to fit the test case will be also examined. 
+This section presents, step by step, the results of the High Performance Video Segmentation Framework, obtained by applying the methods previously discussed to a specific case. The way the algorithms are adapted and manipulated in order to fit the test case will be also examined. 
 
 \subsection{Test Case}
-The specific video we are considering represents a clip of a billiard game with a duration of about 2 minutes, filmed with static camera. The video subdivided in frames generates 3582 images, some examples are shown in Figure \ref{fig:4}. Each frame has dimension of $1280 \times 720$,  for a total of 921'600 pixels. \\
-In the video there are red and yellow balls that have to be separated and labelled as members of two different teams. The final goal is to reassemble the video with only its main features, represented by the single members of each team and display a counter to keep track of the number of balls of each team. 
+The specific video we are considering represents a clip of a billiard game with a duration of about 2 minutes, filmed with static camera. The video subdivided in frames generates 3582 images, some examples of which are shown in Figure \ref{fig:4}. Each frame has dimension of $1280 \times 720$,  for a total of 921'600 pixels. \\
+In the video there are two teams represented by red and yellow balls; the aim of the application is to separate and identify the members of each team. The final goal is to reassemble the video with only its main features, represented by the single balls and display a counter to keep track of each team's members left on the table. 
 
 \begin{figure}[h]
 	\centering
@@ -179,9 +186,9 @@ In the video there are red and yellow balls that have to be separated and labell
 
 \subsection{Video Feature Extraction}
 We want now to suggest an effective approach to perform video feature extraction. From now on, all the methods described are applied to all the single frames of the clip, but for the sake of brevity only an example will be presented.  \\
-Once the frames are extracted from the video by means of the OpenCV library for Python, the \textit{k}-means algorithm is applied to them for the first time in order to separate the main features from those of less interest. However, before applying clustering algorithm to the frames it is convenient to get rid of the possible influence of the secondary objects. For this purpose the background will be set to black on each frame before proceeding with the analysis. \\
-The clustering algorithm is performed using the function \texttt{kmeans} from the OpenCV library. The main parameters given in input are the vectorized image (i.e. number of pixels$\times 3$ array of RGB values), the number of clusters, the termination criteria  and the flag specifying how the initial centroids are chosen. The number of clusters was set to 5 because the initial idea was to identify red balls, yellow balls, white ball, table and background. 
-In Figure \ref{fig:5} it can be observed how the algorithm divides the image in its main components based on the colour, but not exactly as expected. The cluster of major interest for the application is number 3, since it contains the members of the two teams. 
+Once the frames are extracted from the video by means of the OpenCV library for Python, the \textit{k}-means algorithm is applied to them for the first time in order to separate the main features from those of less interest. However, before applying the clustering algorithm to the frames it is convenient to get rid of the possible influence of the secondary objects. For this purpose the background will be set to black on each frame before proceeding with the analysis. \\
+The clustering algorithm is performed using the function \texttt{kmeans} from the OpenCV library. The main parameters given in input are the vectorized image, the number of clusters, the termination criteria  and the flag specifying how the initial centroids are chosen. The image is transformed into a number of pixels$\times 3$ array containing the RGB values; the number of clusters is set to 5 because the initial idea was to identify red balls, yellow balls, white ball, table and background. 
+In Figure \ref{fig:5} it can be observed how the algorithm divides the image in its main components based on the colour; the result is not exactly as expected. 
 
 \begin{figure}[h]
 	\centering
@@ -190,7 +197,10 @@ In Figure \ref{fig:5} it can be observed how the algorithm divides the image in 
 	\label{fig:5}
 \end{figure}
 \noindent
-As previously stated, the result expected from the application of the \textit{k}-means algorithm was the separation of the members of each team in two different clusters. However, it is easy to notice that this task has not been accomplished in the previous step. For this reason the \textit{k}-means clustering is applied for the second time, giving rise to the result represented in Figure \ref{fig:6}. 
+As previously stated, the result wanted from the application of the \textit{k}-means algorithm was the separation of the members of each team in two different clusters. However, it is easy to notice that this task has not been accomplished in the previous step. In spite of this, we have obtained a cluster that contains the member of the two teams, i.e. cluster number 3, and a second application of the \textit{k}-means algorithm can give rise to the division of the teams in two different clusters. \\
+Since there is no way to know in which order the clusters will be generated and therefore it is impossible to identify the cluster that contains the teams, the \textit{k}-means clustering will be applied for the second time to all the resulting frames from the previous step. As before, the algorithm generates 5 clusters from each input, identifying the two teams and removing the noise, as represented in  Figure \ref{fig:6}. \\
+From the double application of \textit{k}-means algorithm we obtain 25 clusters; the next goal will be identifying which of them contain the main features, i.e. the two teams. \\
+\textit{In order to achieve this result we have used a Convolutional Neural Network, trained to classify a cluster as yellow team, red team or noise. The training is performed based on a set of 500 frames classified manually. The precision achieved is over 99\%.  }\textbf{Lore Check}
 
 \begin{figure}[h]
 	\centering
@@ -199,11 +209,14 @@ As previously stated, the result expected from the application of the \textit{k}
 	\label{fig:6}
 \end{figure}
 
-\textbf{NEURAL NETWORK LORE}\\
+Once the two teams have been identified and labelled by the convolutional neural network, the next goal is to identify each member of the two teams, separating them, as can be observed in Figure \ref{fig:7}, by applying the connected components algorithm. This will allow to keep track of the trajectory of every single member and identify the number of balls present on the billiard table. \\
 
-Once the two teams have been identified and labelled by the convolutional neural network, the connected components algorithm can be applied in order to recognize each member of the two teams and separate them in different clusters, as can be observed in Figure \ref{fig:7}. This will allow to keep track of the trajectory of every single member and identify the number of balls present on the billiard table. \\
-The connected component clustering is performed by the library SciPy that employs a Gaussian filter and a function that labels features in an array based on a threshold that in this particular case was set to 50. \\
-Once the connected components are identified the frame is reassembled as shown in Figure \ref{fig:8}. This procedure is applied to each frame and then the final video is reassembled. 
+
+The connected component clustering is performed by the SciPy library that employs a Gaussian filter and a function that labels features in an array based on a threshold that in this particular case was set to 50. \\
+
+
+Once the connected components are identified the frame is reassembled as shown in Figure \ref{fig:8}. 
+After this procedure is applied to each frame, the final video is reassembled with only the members of the two teams, displaying the balls counter. 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.8\linewidth]{./img/cc}
@@ -214,17 +227,32 @@ Once the connected components are identified the frame is reassembled as shown i
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.8\linewidth]{./img/cc}
+	\includegraphics[width=0.8\linewidth]{./img/to_frame}
 	\caption{The reassembled frame with counter}
 	\label{fig:8}
 \end{figure}
 
+\noindent
+All the processes explained until now, applied to a single frame take about 94 seconds to execute on a MacBook Pro with a 2.2 GHz Intel Core i7 processor and a memory of 16 GB 2400 MHz DDR4. So, to run the feature extraction techniques on all the frames on this machine would require 336'708 seconds, i.e. almost 94 hours. For this reason, the framework has been parallelized and can be run on multiple processors, due to the independence of the frames. For these simulations, the ICS cluster that is composed of 42 nodes, is used. Our application is run on regular nodes, with 2 CPUs Intel Xeon E5-2650 v3 @ 2.30GHz, 20 cores and a RAM of 64GB DDR4 @ 2133MHz each. \\
+In order to show the scalability of the Video Segmentation Framework, it is run on 1, 2,4,8 and 16 nodes. It can be observed in Figure \ref{fig:9} that by increasing the number of nodes the execution time reduces significantly and almost ideally, i.e. doubling the number of cores the execution time halves. Because of the limited resources, the point of saturation, i.e. when the program has no more improvement in execution time increasing the number of nodes, could not be shown.
 
-The simulations were run on the ICS cluster that is composed of 42 nodes. Our application was run on regular nodes, with 2 CPUs Intel Xeon E5-2650 v3 @ 2.30GHz, 20 cores and a RAM of 64GB DDR4 @ 2133MHz each. \\
-In order to show the scalability of the application, it was run on 1, 2,4,8 and 16 nodes. It can be observed that by increasing the number of nodes the execution time reduces significantly. 
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\linewidth]{img/scalability}
+	\caption{Framework Scalability: execution time versus number of nodes}
+	\label{fig:9}
+\end{figure}
+
 
 \section{Conclusions}
 
+The presented work is an efficient approach to the video segmentation problem. It is based on the employment of fast and inexpensive techniques that give rise to impressive results. 
+Going through the main steps of the application, 
+%The first task to be completed is the application of the k-means clustering algorithm to the video, previously subdivided in frames. The goal is to be able to identify the main features among other secondary objects and obtain isolated clusters for each of them.\\
+%The next step consists in being able to distinguish between the clusters that contain the main items of the video and those that enclose  noisy components. In order to do that, we are going to use a convolutional neural network that is going to label all the generated clusters, identifying the ones that will be processed in the later stages. \\
+%Each cluster classified as main component of the frame is then exposed to a an algorithm that identifies all the connected components. The goal we want to reach is the partition of the cluster in its individual items.  \\
+%The final step consists in reducing the overall run time of the routine and this will be done by executing the whole process in parallel for a suitable number of frames, depending on the number of processors available in the machine.
+%The characteristics and the mathematical details behind the \textit{k}-means algorithm, convolutional neural network, connected components and multiprocessing are contained in section 2, while the results obtained by means of the application of previously listed methods are discussed in section 3.  \\
 
 \bibliographystyle{unsrt}  
 %\bibliography{references}  %%% Remove comment to use the external .bib file (using bibtex).
