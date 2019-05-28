@@ -3,11 +3,9 @@
 \BOOKMARK [2][-]{subsection.2.1}{k-means clustering algorithm}{section.2}% 3
 \BOOKMARK [2][-]{subsection.2.2}{Connected Components}{section.2}% 4
 \BOOKMARK [2][-]{subsection.2.3}{Convolutional Neural Network}{section.2}% 5
-\BOOKMARK [3][-]{subsubsection.2.3.1}{Convolutional Layer}{subsection.2.3}% 6
-\BOOKMARK [3][-]{subsubsection.2.3.2}{Pooling Layer}{subsection.2.3}% 7
-\BOOKMARK [2][-]{subsection.2.4}{Multiprocessor parallelization}{section.2}% 8
-\BOOKMARK [1][-]{section.3}{Results \046 Discussion}{}% 9
-\BOOKMARK [2][-]{subsection.3.1}{Test Case}{section.3}% 10
-\BOOKMARK [2][-]{subsection.3.2}{Video Feature Extraction}{section.3}% 11
-\BOOKMARK [2][-]{subsection.3.3}{Parallelization \046 Scalability}{section.3}% 12
-\BOOKMARK [1][-]{section.4}{Conclusion \046 Future work }{}% 13
+\BOOKMARK [2][-]{subsection.2.4}{Multiprocessor parallelization}{section.2}% 6
+\BOOKMARK [1][-]{section.3}{Results \046 Discussion}{}% 7
+\BOOKMARK [2][-]{subsection.3.1}{Test Case}{section.3}% 8
+\BOOKMARK [2][-]{subsection.3.2}{Video Feature Extraction}{section.3}% 9
+\BOOKMARK [2][-]{subsection.3.3}{Parallelization \046 Scalability}{section.3}% 10
+\BOOKMARK [1][-]{section.4}{Conclusion \046 Future work }{}% 11

@@ -147,34 +147,30 @@ The application of this algorithm on images will consider each pixel as one node
 
 
 
-\subsection{Convolutional Neural Network}
-A convolutional neural network is a deep learning algorithm that is usually applied in image processing.
-Over the years, convolutional neural networks have become the standard when it comes to image classification because of their speed and accuracy.
-Like other neural network models, it consists of an input layer and an output layer, as well as several hidden layers in the middle.
-The hidden layers of a CNN are usually convolutional layers, max-pooling layers, followed by some common fully connected layers.
-
-\subsubsection{Convolutional Layer}
-The goal of this layer is to reduce the input size while maintaining the spatial relations of the pixels in the image.\\
-A convolutional layer takes as input a tensor, usually of shape batch-size $\times$ channels $\times$ height $\times$ width. Channels refer to the numbers of channels in the image, normally 3: RGB
-An additional parameter of this layer is the kernel. Kernels can have different sizes, and they define the output size of the layer and how the input image is processed.\\
-For example, a kernel of size 3x3 will scan over the input image, taking the value of each pixel and multiplying it by the value saved in the kernel, then it will sum up all the results and generate the value for the output. Now the kernel will move by 1 pixel and repeat the process
+\subsection{Convolutional Neural Network} 
+A convolutional neural network is a deep learning algorithm that is usually applied in image processing \cite{14}.
+Over the years, using convolutional neural networks have become the standard approach when it comes to image classification because of their speed and accuracy.
+Like other neural network models, it consists of an input layer and an output layer, with several hidden layers in between.
+The hidden layers of a CNN are usually convolutional layers, max-pooling layers, followed by some common fully connected layers.\\
+The goal of the convolutional layer is to reduce the input size while maintaining the spatial relations of the pixels in the image. A convolutional layer takes as input a tensor, usually of shape batch-size $\times$ channels $\times$ height $\times$ width, and a kernel. The number of channels depends on the characteristics of the image: usually, taking into consideration the colour, there are three channels, that correspond to the three RGB values. 
+On the other side, kernels define the output size of the layer and how the input image is processed. They can have different sizes and apply different functions to the pixels, depending on how they are defined.  \\
+For example as shown in Figure \ref{fig:13}, considering a 3 $\times$ 3 kernel, a mask of the same dimension scans over the whole input image, pixel by pixel, computing the value in the centre with a weighted sum of all the pixels in the mask. The weights are defined by the selected kernel.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.4\linewidth]{img/kernel}
-	\caption{A visual representation of a 3x3 kernel}
-	\label{fig:3}
+	\includegraphics[width=0.5\linewidth]{img/kernel}
+	\caption{A visual example of a convolutional layer with a 3$\times$3 kernel \cite{15}}
+	\label{fig:13}
 \end{figure}
 
-\subsubsection{Pooling Layer}
-The goal of this layer is again to reduce the input size, however, this one is a lossy layer, meaning that we will lose a bit of the information of the input.
-Usually, this layer is applied after a convolutional layer.
-What it does is taking the maximum of a group of pixels, usually a 2x2. By doing this the output size is halved.
+\noindent
+After the application of the convolutional layer, the goal of the pooling layer  is to further reduce the input size. However, it  is a lossy layer, meaning that it will not conserve all the information given by the input.
+It usually divides the image in many 2$\times$2 groups of pixels and substitutes each of them with a single pixel, the one with the maximum  value. This halves the size of the image, as can be seen in \ref{fig:12}.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.4\textwidth]{img/maxpool}
-	\caption{A visual representation of a max-pooling layer http://cs231n.github.io/convolutional-networks/}
-	\label{fig:4}
+	\caption{A visual representation of a max-pooling layer}
+	\label{fig:12}
 \end{figure}
 
 %\begin{figure}[h]
@@ -192,7 +188,7 @@ The usage of multiple processors instead of one presents several advantages. One
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.5\linewidth]{img/multiprocessing}
+	\includegraphics[width=0.35\linewidth]{img/multiprocessing}
 	\caption{Structure of a centralized shared-memory multiprocessor \cite{14}}
 	\label{fig:3}
 \end{figure}
@@ -222,7 +218,7 @@ In Figure \ref{fig:5} it can be observed how the algorithm divides the image in 
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.8\linewidth]{./img/cluster1}
+	\includegraphics[width=0.6\linewidth]{./img/cluster1}
 	\caption{The clusters resulting from the first application of \textit{k}-means algorithm}
 	\label{fig:5}
 \end{figure}
@@ -231,7 +227,7 @@ As previously stated, the result wanted from the application of the \textit{k}-m
 Since there is no way to know in which order the clusters will be generated and therefore it is impossible to identify the cluster that contains the teams, the \textit{k}-means clustering will be applied for the second time to all the resulting frames from the previous step. As before, the algorithm generates 5 clusters from each input, identifying the two teams and removing the noise, as represented in  Figure \ref{fig:6}. \\
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.8\linewidth]{./img/clusters2}
+	\includegraphics[width=0.6\linewidth]{./img/clusters2}
 	\caption{The clusters resulting from the second application of \textit{k}-means algorithm to Cluster 3 from Figure \ref{fig:5}}
 	\label{fig:6}
 \end{figure}
@@ -244,7 +240,7 @@ In order to achieve this result we have used a Convolutional Neural Network, tra
 Once the two teams have been identified and labelled by the convolutional neural network, the next goal is to identify each member of the two teams, separating them, as can be observed in Figure \ref{fig:7}, by applying the connected components algorithm. This will allow to keep track of the trajectory of every single member and identify the number of balls present on the billiard table.
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.8\linewidth]{./img/cc}
+	\includegraphics[width=0.6\linewidth]{./img/cc}
 	\caption{The clusters resulting from the application of the connected components algorithm applied to the Cluster 3 of Figure \ref{fig:6}}
 	\label{fig:7}
 \end{figure}
@@ -254,34 +250,35 @@ The connected component clustering is performed by the SciPy library that employ
 Once the connected components are identified the frame is reassembled, as shown in Figure \ref{fig:8}. 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.8\linewidth]{./img/to_frame}
+	\includegraphics[width=0.7\linewidth]{./img/to_frame}
 	\caption{The reassembled frame with counter}
 	\label{fig:8}
 \end{figure}
+
+\noindent
 After this procedure is applied to each frame, the final video is reassembled with only the members of the two teams, displaying the balls counter, as visualized in Figure \ref{fig:10}. 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.8\linewidth]{./img/frames}
+	\includegraphics[width=1\linewidth]{./img/frames}
 	\caption{The reassembled frame with counter}
 	\label{fig:10}
 \end{figure}
 
 
-
+\newpage
 \subsection{Parallelization \& Scalability}
 All the processes explained until now, applied to a single frame take about 94 seconds to execute on a MacBook Pro with a 2.2 GHz Intel Core i7 processor and a memory of 16 GB 2400 MHz DDR4. So, to run the feature extraction techniques on all the frames on this machine would require 336'708 seconds, i.e. almost 94 hours. For this reason, the framework has been parallelized and can be run on multiple processors, due to the independence of the frames. For these simulations, the ICS cluster that is composed of 42 nodes, is used. Our application is run on regular nodes, with 2 CPUs Intel Xeon E5-2650 v3 @ 2.30GHz, 20 cores and a RAM of 64GB DDR4 @ 2133MHz each. \\
 In order to show the scalability of the Video Segmentation Framework, it is run on 1, 2,4,8 and 16 nodes. It can be observed in Figure \ref{fig:9} that by increasing the number of nodes the execution time reduces significantly and almost ideally, i.e. doubling the number of cores the execution time halves. Because of the limited resources, the point of saturation, i.e. when the program has no more improvement in execution time increasing the number of nodes, could not be shown.
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.7\linewidth]{img/scalability}
+	\includegraphics[width=0.8\linewidth]{img/scalability}
 	\caption{Framework Scalability: execution time versus number of nodes}
 	\label{fig:9}
 \end{figure}
 
-
+\newpage
 \section{Conclusion \& Future work }
-
 The presented work is an efficient approach to the video segmentation problem. It is based on the employment of fast and inexpensive techniques that successfully identify the critical components of a video. \\
 The main steps characterizing the High Performance Video Segmentation Framework are 
 \begin{itemize}
@@ -376,6 +373,10 @@ Volume 55
 		\textit{Computer architecture: a quantitative approach}, Fifth edition,
 		2012
 	\bibitem{14}
+		John L. Hennessy, David A. Patterson,
+		\textit{Guide to Convolutional Neural Networks. A Practical Application to Traffic-Sign Detection and Classification}, First edition,
+		2017
+	\bibitem{15}
 		John L. Hennessy, David A. Patterson,
 		\textit{Guide to Convolutional Neural Networks. A Practical Application to Traffic-Sign Detection and Classification}, First edition,
 		2017
