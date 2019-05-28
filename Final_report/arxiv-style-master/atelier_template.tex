@@ -10,9 +10,9 @@
 \usepackage{booktabs}       % professional-quality tables
 \usepackage{amsfonts}       % blackboard math symbols
 \usepackage{nicefrac}       % compact symbols for 1/2, etc.
-\usepackage{microtype}      % microtypography
+%\usepackage{microtype}      % microtypography
 \usepackage{lipsum}		% Can be removed after putting your text content
-
+\usepackage{float}
 \title{A High Performance Video Segmentation Framework }
 
 %\date{September 9, 1985}	% Here you can change the date presented in the paper title
@@ -84,7 +84,7 @@ In the particular case of this application the distance between the pixels is co
 A visual representation of the \textit{k}-means algorithm can be observed in Figure \ref{fig:1}
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.7\linewidth]{./img/k_means}
+	\includegraphics[width=0.7\linewidth]{img/k_means}
 	\caption{\textit{k}-means clustering algorithm}
 	\label{fig:1}
 \end{figure}
@@ -105,9 +105,34 @@ The application of this algorithm on images will consider each pixel as one node
 
 
 \subsection{Convolutional Neural Network}
-\textbf{LORE LAVORA}
+A convolutional neural network is a deep learning algorithm that is usually applied in image processing.
+Over the years, convolutional neural networks have become the standard when it comes to image classification because of their speed and accuracy.
+Like other neural network models, it consists of an input layer and an output layer, as well as several hidden layers in the middle.
+The hidden layers of a CNN are usually convolutional layers, max-pooling layers, followed by some common fully connected layers.
 
+\subsubsection{Convolutional Layer}
+The goal of this layer is to reduce the input size while maintaining the spatial relations of the pixels in the image.\\
+A convolutional layer takes as input a tensor, usually of shape batch-size $\times$ channels $\times$ height $\times$ width. Channels refer to the numbers of channels in the image, normally 3: RGB
+An additional parameter of this layer is the kernel. Kernels can have different sizes, and they define the output size of the layer and how the input image is processed.\\
+For example, a kernel of size 3x3 will scan over the input image, taking the value of each pixel and multiplying it by the value saved in the kernel, then it will sum up all the results and generate the value for the output. Now the kernel will move by 1 pixel and repeat the process
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.4\linewidth]{img/kernel}
+	\caption{A visual representation of a 3x3 kernel}
+	\label{fig:3}
+\end{figure}
+
+\subsubsection{Pooling Layer}
+The goal of this layer is again to reduce the input size, however, this one is a lossy layer, meaning that we will lose a bit of the information of the input.
+Usually, this layer is applied after a convolutional layer.
+What it does is taking the maximum of a group of pixels, usually a 2x2. By doing this the output size is halved.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.4\textwidth]{img/maxpool}
+	\caption{A visual representation of a max-pooling layer http://cs231n.github.io/convolutional-networks/}
+	\label{fig:4}
+\end{figure}
 
 \subsection{Multiprocessor parallelization}
 Multiprocessors refers to the use of two or more CPUs (central processing units) contained in a single computer system that supports the execution of threads collaborating on a single task. The coordination and the usage of the single processors is controlled by the same operating system and all the processors share the same main memory by means of a shared address space.  \\
@@ -117,7 +142,7 @@ The usage of multiple processors instead of one presents several advantages. One
 	\centering
 	\includegraphics[width=0.5\linewidth]{img/multiprocessing}
 	\caption{Structure of a centralized shared-memory multiprocessor}
-	\label{fig:3}
+	\label{fig:5}
 \end{figure}
 
 

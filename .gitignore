@@ -1,8 +1,8 @@
 .DS_Store
 *.pdf
-*.jpg
+Project/**/*.jpg
 *.mp4
-*.png
+Project/**/*.png
 .vscode
 .mypy_cache
 data
