@@ -5,7 +5,7 @@
 \usepackage{amsmath}
 \usepackage{algorithm}
 \usepackage[]{algpseudocode}
-
+\usepackage{indentfirst}
 
 %%% For algorithms %%%
 \makeatletter
@@ -84,7 +84,7 @@ The organization of the rest of the paper is illustrated in Figure \ref{fig:smal
  \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.95\linewidth]{img/smallflow}
-	\caption{Workflow: extraction of the main components from the original frames}
+	\caption{Workflow: extraction of the main components from the original frames.}
 	\label{fig:small}
 \end{figure}
 The first task to be completed is the application of the k-means clustering algorithm to the video, previously subdivided into frames. The goal is to be able to identify the main features among other secondary objects and obtain isolated clusters for each of them.
@@ -99,7 +99,7 @@ The next step consists in being able to distinguish between the clusters that co
 \section{Algorithms and Mathematical Background}
 In order to apply the algorithms and adapt them to a specific problem it is fundamental to fully understand all the theoretical and mathematical concepts characterizing their process. For this reason, before proceeding with the discussion and visualisation of the video segmentation framework results, in this section is presented the theoretical background of the methods used.
 
-\subsection{\textit{k}-means clustering algorithm} 
+\subsection{\textit{k}-means Clustering Algorithm} 
 In image segmentation, \textit{k}-means is one of the most popular clustering algorithms. It is intuitive, easy to implement, and converges monotonically. In spite of this, \textit{k}-means also presents some drawbacks such as the fact that the number of clusters has to be known a priori and different initial seeds can give rise to different outputs, because of the randomness of the initial component \cite{10}.
 
 The algorithm uses an iterative approach, as represented in Figure \ref{fig:1} and formalized in Algorithm \ref{alg:1}. Starting from an initial set of random centroids, at each iteration it generates the clusters by minimizing the distance between each point and the centroids, based on a given proximity measure. Convergence is achieved when points are no longer interchanged between the clusters.
@@ -110,7 +110,7 @@ The algorithm uses an iterative approach, as represented in Figure \ref{fig:1} a
 	\label{fig:1}
 \end{figure}
 \begin{algorithm}
-	\caption{\textit{k}-means clustering}\label{kmeans}
+	\caption{\textit{k}-means clustering.}\label{kmeans}
 	\label{alg:1}
 	\begin{algorithmic}[1]
 		\Procedure{\textit{k}-means}{}
@@ -129,7 +129,7 @@ The ultimate goal of the algorithm is to partition $N$ initial data points into 
 \begin{equation*}
 \begin{split}
 SSE(C) &= \sum_{k=1}^{K} \sum_{x_i \in C_k} \| x_i - c_k\|^2, \\ \\
-c_k &= \frac{\sum\limits_{x_i \in C_k} x_i}{|C_k|.}
+c_k &= \frac{\sum\limits_{x_i \in C_k} x_i}{|C_k|}.
 \end{split}
 \end{equation*}
 
@@ -167,7 +167,7 @@ For example as shown in Figure \ref{fig:13}, considering a 3 $\times$ 3 kernel, 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\linewidth]{img/kernel}
-	\caption{A visual example of a convolutional layer with a 3$\times$3 kernel \cite{14}}
+	\caption{A visual example of a convolutional layer with a 3$\times$3 kernel \cite{14}.}
 	\label{fig:13}
 \end{figure}
 
@@ -192,7 +192,7 @@ where $Y$ is the output, $W$ is the matrix containing the neuron weights, and $b
 
 
 
-\subsection{Multiprocessor parallelization}
+\subsection{Multiprocessor Parallelization}
 Multiprocessors refers to the use of two or more CPUs (central processing units) contained in a single computer system that supports the execution of threads collaborating on a single task. The coordination and the usage of the single processors is controlled by the same operating system and all the processors share the same main memory by means of a shared address space.
 
 The usage of multiple processors instead of one presents several advantages. One of the most important ones is the increase of the  throughput, which means that more work can be executed and completed in a unit time. However, an important drawback could be the cost of the communication among different processors. For this reason the parallelization of a program with multiprocessing is particularly convenient if the tasks are independent of each other.
@@ -200,7 +200,7 @@ The usage of multiple processors instead of one presents several advantages. One
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.35\linewidth]{img/multiprocessing}
-	\caption{Structure of a centralized shared-memory multiprocessor \cite{15}}
+	\caption{Structure of a centralized shared-memory multiprocessor \cite{15}.}
 	\label{fig:3}
 \end{figure}
 
@@ -289,7 +289,7 @@ In order to show the scalability of the video segmentation framework, it is run 
 	\label{fig:9}
 \end{figure}
 
-\section{Conclusion and Future work }
+\section{Conclusion and Future Work }
 The presented work is an efficient approach to the video segmentation problem. It is based on the employment of fast and inexpensive techniques that successfully identify the critical components of a video.
 
 The main steps characterizing the high performance video segmentation framework are 
